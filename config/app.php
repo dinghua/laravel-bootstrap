@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'Asia/Chongqing',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'zh-cn',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => env('APP_KEY', 'SomeRandomString'),
+	'key' => env('APP_KEY', 'Sam0Rand0mStr1ng'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
