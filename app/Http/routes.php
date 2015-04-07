@@ -10,5 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Chitunet\Models\Role;
+Route::get('/', function(){
 
-Route::get('/', 'WelcomeController@index');
+    return 'ok';
+});
+
+
