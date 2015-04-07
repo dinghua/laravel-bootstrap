@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder {
         $admin->display_name = 'User Administrator';
         $admin->description  = 'User is allowed to manage and edit other anything';
         $admin->save();
-        echo "admin role creted\n";
+        echo "admin role created\n";
         return TRUE;
     }
 

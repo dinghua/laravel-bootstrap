@@ -1,19 +1,25 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-use Chitunet\Models\Role;
-Route::get('/', function(){
+use Illuminate\Contracts\Auth\Guard;
 
-    return 'ok';
+Route::get('/', function ()
+{
+    return view('home');
 });
 
+Route::controller('ui', 'UiController');
 
+
+Route::get('debug', function (Guard $auth)
+{
+//    $field               = new \Chitunet\Models\ProfileField();
+//    $field->key          = 'nickname';
+//    $field->display_name = '昵称';
+//    $field->type         = 'string';
+//    $field->default      = '';
+//    $field->save();
+
+    $user = \Chitunet\Models\User::find(1);
+
+    return $user->profile();
+});

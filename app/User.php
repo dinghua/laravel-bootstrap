@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace Chitunet;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

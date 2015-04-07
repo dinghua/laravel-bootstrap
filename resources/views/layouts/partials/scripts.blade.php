@@ -1,0 +1,1 @@
+<script src="{{ elixir("assets/js/all.js") }}"></script>

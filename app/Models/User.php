@@ -18,23 +18,31 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use EntrustUserTrait;
 
     protected $table = 'users';
-    protected $fillable = [ 'email', 'name'];
+    protected $fillable = [ 'email', 'name' ];
     protected $hidden = [ 'password', 'remember_token' ];
 
-    #********
-    #* 此表为复合型的用户数据表，根据type不同确定不同用户
-    #* type : Manager 管理型用户
-    #* type : Customer 投资型客户
-    #********
-    //限定管理型用户
-    public function scopeManager($query)
+    public function profile($key = NULL)
     {
-        return $query->where('user_type', '=', 'Manager');
+        if (!$key){
+            return $this->profiles();
+        }
+        $filed = ProfileField::where('key', $key)->first();
+        if (!$filed) return FALSE;
+        $profile = Profile::where('user_id', $this->id)->where('field_id', $filed->id)->first();
+        if (!$profile) return FALSE;
+
+        return $profile->value;
     }
 
-    //限定投资型客户
-    public function scopeCustomer($query)
+    public function profiles()
     {
-        return $query->where('user_type', '=', 'Customer');
+        $result   = [ ];
+        $profiles = Profile::where('user_id', $this->id)->get();
+        foreach ($profiles as $profile)
+        {
+            $result[ $profile->field->key ] = $profile->value;
+        }
+
+        return $result;
     }
 }

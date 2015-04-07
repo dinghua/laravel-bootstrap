@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace Chitunet\Commands;
 
 abstract class Command {
 
