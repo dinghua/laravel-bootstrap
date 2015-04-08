@@ -9,8 +9,7 @@
 
 use Chitunet\Interfaces\IRepository;
 
-abstract class BaseRepository implements IRepository
-{
+abstract class BaseRepository implements IRepository {
 
     /**
      * The Model instance.
@@ -18,6 +17,8 @@ abstract class BaseRepository implements IRepository
      * @var Illuminate\Database\Eloquent\Model
      */
     protected $model;
+
+    protected $index_ability;
 
     /**
      * Get Model by id.
@@ -30,29 +31,9 @@ abstract class BaseRepository implements IRepository
         return $this->model->findOrFail($id);
     }
 
-    /**
-     * IRepository接口store方法
-     * 请在子类中重写或重载具体的实现方法
-     *
-     * @param  array $inputs
-     * @param  string|array $extra
-     * @return void
-     */
-    public function store($inputs = [], $extra = ''){
-        return;
-    }
-
-    /**
-     * IRepository 接口 destroy 方法
-     * 请在子类中重写或重载具体的实现方法
-     *
-     * @param  int $id
-     * @param  string|array $extra
-     * @return void
-     */
-    public function destroy($id = 0, $extra = '')
+    public function __call($method)
     {
-        return;
+        
     }
 
 }

@@ -9,5 +9,11 @@ use Zizaco\Entrust\EntrustPermission;
  * All rights reserved.
  */
 class Permission extends EntrustPermission {
-
+    protected $fillable = ['name', 'display_name'];
+    public function user_count(){
+        if($this->user){
+            return $this->user->count();
+        }
+        return 0;
+    }
 }

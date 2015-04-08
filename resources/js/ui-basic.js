@@ -21,5 +21,7 @@
             var $target = $($this.attr('target')) || $this;
             $target.toggleClass($this.attr('ui-toggle'));
         });
+
+        $('.dropdown-toggle').dropdown();
     });
 }(jQuery);

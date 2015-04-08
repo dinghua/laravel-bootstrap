@@ -30,6 +30,15 @@ class DatabaseSeeder extends Seeder {
         $admin->description  = 'User is allowed to manage and edit other anything';
         $admin->save();
         echo "admin role created\n";
+
+        $manage_users = new \Chitunet\Models\Permission();
+        $manage_users->name = 'manage_users';
+        $manage_users->display_name = 'Edit Users'; // optional
+        $manage_users->description  = 'edit existing users'; // optional
+        $manage_users->save();
+        echo "manager user permission created\n";
+        $admin->attachPermission($manage_users);
+        echo "add attach to admin role\n";
         return TRUE;
     }
 

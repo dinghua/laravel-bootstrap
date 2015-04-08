@@ -1,25 +1,35 @@
 <?php
 
-use Illuminate\Contracts\Auth\Guard;
-
 Route::get('/', function ()
 {
-    return view('home');
+    if (Auth::guest())
+    {
+        return view('home');
+    }
+
+    return Redirect::to('admin/dashboard');
 });
 
-Route::controller('ui', 'UiController');
+Route::controller('auth', 'AuthController');
 
-
-Route::get('debug', function (Guard $auth)
+Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
 {
-//    $field               = new \Chitunet\Models\ProfileField();
-//    $field->key          = 'nickname';
-//    $field->display_name = '昵称';
-//    $field->type         = 'string';
-//    $field->default      = '';
-//    $field->save();
+    Route::get('dashboard', function ()
+    {
+        return view('admin.dashboard');
+    });
 
-    $user = \Chitunet\Models\User::find(1);
+    Route::resource('permission', '\Chitunet\Http\Controllers\Admin\PermissionController');
+    Route::resource('role', '\Chitunet\Http\Controllers\Admin\RoleController');
+    Route::get('role/{id}/permissions', '\Chitunet\Http\Controllers\Admin\RoleController@getPermissions');
+    Route::post('role/{id}/permissions', '\Chitunet\Http\Controllers\Admin\RoleController@postPermissions');
 
-    return $user->profile();
+    Route::resource('entity', '\Chitunet\Http\Controllers\Admin\EntityController');
+    Route::get('customer/{id}/delete', '\Chitunet\Http\Controllers\Admin\CustomerController@destroy');
+
+    Route::resource('customer', '\Chitunet\Http\Controllers\Admin\CustomerController');
+    Route::get('entity/{id}/delete', '\Chitunet\Http\Controllers\Admin\EntityController@destroy');
 });
+
+// debug for templates
+Route::controller('ui', 'UiController');
