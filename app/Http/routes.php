@@ -1,5 +1,7 @@
 <?php
 
+use Chitunet\Commands\SendEmail;
+
 Route::get('/', function ()
 {
     if (Auth::guest())
@@ -21,7 +23,8 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
 
     Route::get('showPopup/{input_id}', '\Barryvdh\Elfinder\ElfinderController@showPopup');
     Route::get('connector', '\Barryvdh\Elfinder\ElfinderController@showIndex');
-    Route::get('connector1', function(){
+    Route::get('connector1', function ()
+    {
         return 'ok';
     });
     Route::resource('permission', '\Chitunet\Http\Controllers\Admin\PermissionController');
@@ -42,3 +45,12 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
 
 // debug for templates
 Route::get('ui/{name}', 'UiController@get');
+
+Route::any('job', 'JobController@start');
+
+Route::get('debug', function ()
+{
+    Queue::push(new SendEmail([
+        'title'=>'hello'
+    ]));
+});

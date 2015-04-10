@@ -65,23 +65,10 @@
                     <li>
                         <a href="/admin/campaign">
                             <i class="fa fa-tasks"></i>
-                            <span>营销活动</span>
+                            <span>任务管理</span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="/admin/sales">
-                            <i class="icon-basket"></i>
-                            <span>销售</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/admin/charts">
-                            <i class=" icon-bar-chart"></i>
-                            <span>报表</span>
-                        </a>
-                    </li>
 
                     <li class="line dk"></li>
 
