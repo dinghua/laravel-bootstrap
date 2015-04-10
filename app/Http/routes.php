@@ -21,12 +21,14 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
         return view('admin.dashboard');
     });
 
-    Route::get('showPopup/{input_id}', '\Barryvdh\Elfinder\ElfinderController@showPopup');
-    Route::get('connector', '\Barryvdh\Elfinder\ElfinderController@showIndex');
-    Route::get('connector1', function ()
+    Route::get('console', function ()
     {
-        return 'ok';
+        return view('admin.console');
     });
+
+
+    Route::get('showPopup/{input_id}', '\Barryvdh\Elfinder\ElfinderController@showPopup');
+
     Route::resource('permission', '\Chitunet\Http\Controllers\Admin\PermissionController');
     Route::get('permission/{id}/delete', '\Chitunet\Http\Controllers\Admin\PermissionController@destroy');
 
@@ -50,7 +52,11 @@ Route::any('job', 'JobController@start');
 
 Route::get('debug', function ()
 {
-    Queue::push(new SendEmail([
-        'title'=>'hello'
-    ]));
+    $message = [
+        'title' => '111111111',
+        'time'  => time()
+    ];
+    Queue::push(new SendEmail(), 'hello2');
+    Log::info('push job.'.$message['time']);
+
 });

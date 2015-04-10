@@ -10,26 +10,25 @@ use Log;
 
 class SendEmail extends Command implements SelfHandling, ShouldBeQueued {
 
-	use InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue, SerializesModels;
 
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		//
-	}
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
 
-	/**
-	 * Execute the command.
-	 *
-	 * @return void
-	 */
-	public function handle(SendEmail $command)
-	{
-		Log::info('HELLO');
-	}
+    /**
+     * Execute the command.
+     *
+     * @return void
+     */
+    public function handle(SendEmail $command)
+    {
+        Log::info('do job');
+    }
 
 }
