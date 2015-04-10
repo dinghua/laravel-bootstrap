@@ -23,13 +23,6 @@
                     </li>
 
                     <li>
-                        <a href="/admin/group">
-                            <i class="fa fa-group"></i>
-                            <span>用户组</span>
-                        </a>
-                    </li>
-
-                    <li>
                         <a class="auto">
                               <span class="pull-right text-muted">
                                 <i class="fa fa-fw fa-angle-right text"></i>
@@ -63,7 +56,7 @@
                     </li>
 
                     <li>
-                        <a href="/admin/campaign">
+                        <a href="/admin/console">
                             <i class="fa fa-tasks"></i>
                             <span>任务管理</span>
                         </a>

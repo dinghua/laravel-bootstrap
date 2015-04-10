@@ -9,7 +9,7 @@
     <?php endif; ?>
 
     <?php if ($showField): ?>
-        <input type="text" class="form-control popup_selector" id="<?= $name ?>" name="<?= $name ?>" data-inputid="<?= $name ?>"/>
+        <?= Form::input($type, $name, $options['default_value'], ['class'=>'form-control popup_selector', 'data-inputid'=>$name]) ?>
     <?php endif; ?>
 
     <?php if ($showError && isset($errors)): ?>
