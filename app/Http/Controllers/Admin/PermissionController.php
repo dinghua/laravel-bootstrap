@@ -2,6 +2,7 @@
 
 use Auth;
 use Chitunet\Interfaces\IEntity;
+use Entrust;
 
 /**
  * Created by chitunet.com
@@ -21,16 +22,11 @@ class PermissionController extends BaseAdminController implements IEntity {
 
     public function check($action)
     {
-        if (Auth::user()->can('manage_permission'))
+        if (Entrust::can('manage_permission'))
         {
             return TRUE;
         }
-
         return FALSE;
     }
 
-    public function _index()
-    {
-        //return 'ok';
-    }
 }

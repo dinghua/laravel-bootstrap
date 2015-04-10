@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * All rights reserved.
  */
 class Entity extends Model {
+
     protected $table = 'entities';
-    protected $fillable = [ 'name', 'description', 'body' ];
+    protected $fillable = [ 'name', 'description', 'photo', 'body' ];
 }

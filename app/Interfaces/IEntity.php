@@ -13,5 +13,5 @@
  */
 interface IEntity
 {
-    public function _index();
+
 }

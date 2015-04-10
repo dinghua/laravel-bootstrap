@@ -8,8 +8,8 @@ use Chitunet\Interfaces\IEntity;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
 use Log;
+use Entrust;
 
 /**
  * Created by chitunet.com
@@ -22,6 +22,7 @@ abstract class BaseAdminController extends BaseController {
 
     private $_model_namespace = 'Chitunet\Models';
     private $_form_namespace = 'Chitunet\Forms';
+    private $_request_namespace = 'Chitunet\Http\Requests';
 
     public $displayPerPage = 10;
     protected $_meta = [
@@ -40,8 +41,9 @@ abstract class BaseAdminController extends BaseController {
 
     private $_modelName = '';
     private $_formName = '';
-
+    private $_requestName = '';
     public $formBuilder;
+    public $request;
 
     public $permission_map = [
         'view' => 'manager_base'
@@ -55,8 +57,8 @@ abstract class BaseAdminController extends BaseController {
     {
         $this->_modelName  = $this->_model_namespace . '\\' . $this->meta('model');
         $this->_formName   = $this->_form_namespace . '\\' . $this->meta('model') . 'Form';
+        $this->_requestName = $this->_request_namespace . '\\' . $this->meta('model') . 'Request';
         $this->formBuilder = $formBuilder;
-
         view()->share('controller', $this);
     }
 
@@ -82,16 +84,16 @@ abstract class BaseAdminController extends BaseController {
         $form = $this->formBuilder->create($this->_formName, [
             'method' => 'POST',
             'url'    => $this->route
-        ])->add('Save', 'submit', [ 'attr' => [ 'class' => 'btn btn-primary btn-sm' ] ]);
+        ])->add('保存', 'submit', [ 'attr' => [ 'class' => 'btn btn-primary btn-sm' ] ]);
 
         return view($this->route . '.form')->with(compact('form'));
     }
 
-    public function store(Request $request)
+    public function store()
     {
         $this->_check('create');
+        $request = $this->getRequest();
         $this->save($request->input());
-
         return Redirect::to($this->route);
     }
 
@@ -114,7 +116,7 @@ abstract class BaseAdminController extends BaseController {
             'method' => 'PUT',
             'url'    => $this->route . '/' . $id,
             'model'  => $model
-        ])->add('Save', 'submit', [ 'attr' => [ 'class' => 'btn btn-primary btn-sm' ] ]);
+        ])->add('保存', 'submit', [ 'attr' => [ 'class' => 'btn btn-primary btn-sm' ] ]);
 
         return view($this->route . '.form')->with(compact('form'));
     }
@@ -155,7 +157,7 @@ abstract class BaseAdminController extends BaseController {
         }
 
         $permission = strtolower($this->meta('model') . '_' . $action);
-        if (Auth::user()->can($permission))
+        if (Entrust::can($permission))
         {
             return TRUE;
         }
@@ -175,6 +177,14 @@ abstract class BaseAdminController extends BaseController {
             $model = App::make($this->_modelName);
         }
         return $model;
+    }
+
+    public function getRequest(){
+        if(class_exists($this->_requestName)){
+            return App::make($this->_requestName);
+        }else{
+            return new Request();
+        }
     }
 
     public function __call($method, $param)

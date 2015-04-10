@@ -19,10 +19,19 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
         return view('admin.dashboard');
     });
 
+    Route::get('showPopup/{input_id}', '\Barryvdh\Elfinder\ElfinderController@showPopup');
+    Route::get('connector', '\Barryvdh\Elfinder\ElfinderController@showIndex');
+    Route::get('connector1', function(){
+        return 'ok';
+    });
     Route::resource('permission', '\Chitunet\Http\Controllers\Admin\PermissionController');
+    Route::get('permission/{id}/delete', '\Chitunet\Http\Controllers\Admin\PermissionController@destroy');
+
     Route::resource('role', '\Chitunet\Http\Controllers\Admin\RoleController');
-    Route::get('role/{id}/permissions', '\Chitunet\Http\Controllers\Admin\RoleController@getPermissions');
-    Route::post('role/{id}/permissions', '\Chitunet\Http\Controllers\Admin\RoleController@postPermissions');
+    Route::get('role/{id}/delete', '\Chitunet\Http\Controllers\Admin\RoleController@destroy');
+
+    Route::get('role_permissions', '\Chitunet\Http\Controllers\Admin\RoleController@getPermissions');
+    Route::post('role_permissions', '\Chitunet\Http\Controllers\Admin\RoleController@postPermissions');
 
     Route::resource('entity', '\Chitunet\Http\Controllers\Admin\EntityController');
     Route::get('customer/{id}/delete', '\Chitunet\Http\Controllers\Admin\CustomerController@destroy');
@@ -32,4 +41,4 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
 });
 
 // debug for templates
-Route::controller('ui', 'UiController');
+Route::get('ui/{name}', 'UiController@get');

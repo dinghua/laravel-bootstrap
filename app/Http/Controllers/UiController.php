@@ -2,8 +2,8 @@
 
 class UiController extends Controller {
 
-    public function getIcon(){
-        return view('templates.icon');
+    public function get($name){
+        return view('templates.'.$name);
     }
 
 }

@@ -147,6 +147,7 @@ return [
         'Zizaco\Entrust\EntrustServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'Kris\LaravelFormBuilder\FormBuilderServiceProvider',
+        'Barryvdh\Elfinder\ElfinderServiceProvider',
     ],
 
     /*

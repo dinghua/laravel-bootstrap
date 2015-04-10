@@ -1,6 +1,8 @@
 <?php namespace Chitunet\Http\Controllers\Admin;
 
+//use Chitunet\Http\Requests\CreateEntityRequest as Request;
 use Chitunet\Interfaces\IEntity;
+use Illuminate\Http\Request;
 
 /**
  * Created by chitunet.com
@@ -18,8 +20,4 @@ class EntityController extends BaseAdminController implements IEntity {
         'view'     => 'admin.entity'
     ];
 
-    public function _index()
-    {
-        return 'ok';
-    }
 }

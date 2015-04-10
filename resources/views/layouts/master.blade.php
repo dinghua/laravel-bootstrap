@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>@yield('site_name')</title>
     @include('layouts.partials.styles')
+    @yield('extend_styles')
 </head>
 <body>
 <div class="app">
@@ -17,5 +18,6 @@
 </div>
 
 @include('layouts.partials.scripts')
+@yield('extend_scripts')
 </body>
 </html>

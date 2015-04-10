@@ -3,6 +3,8 @@
 use Chitunet\Interfaces\IEntity;
 use Auth;
 use Chitunet\Models\Permission;
+use Chitunet\Models\Role;
+use Illuminate\Http\Request;
 
 /**
  * Created by chitunet.com
@@ -20,17 +22,23 @@ class RoleController extends BaseAdminController implements IEntity {
         'view'     => 'admin.role'
     ];
 
-    public function getPermissions($id){
+    public function getPermissions(){
         $this->check('permissions');
-        $role = $this->initModel($id);
-        $perms = $role->perms;
-        $all_perms = Permission::all();
-        return view('admin.role.permission')->with(compact('role', 'perms', 'all_perms'));
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('admin.role.permission')->with(compact('roles', 'permissions'));
     }
 
-    public function postPermissions($id){
+    public function postPermissions(Request $request){
         $this->check('permissions');
-        return redirect('/admin/role');
+        $data = $request->input('data');
+
+        foreach($data as $role_id=>$perms){
+            $role = Role::find($role_id);
+            $role->perms()->sync($perms);
+        }
+
+        return response()->json(['result'=>1]);
     }
 
     public function check($action)
@@ -41,10 +49,5 @@ class RoleController extends BaseAdminController implements IEntity {
         }
 
         return FALSE;
-    }
-
-    public function _index()
-    {
-
     }
 }

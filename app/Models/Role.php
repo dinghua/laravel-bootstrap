@@ -14,4 +14,14 @@ class Role extends EntrustRole {
 
     protected $fillable = [ 'name', 'display_name' ];
 
+    public function hasPerm($name){
+        $perms = $this->perms;
+        foreach($perms as $perm){
+            if($name == $perm->name){
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
 }

@@ -19,9 +19,4 @@ class CustomerController extends BaseAdminController implements IEntity {
         'name_key' => 'customer',
         'view'     => 'admin.customer'
     ];
-
-    public function _index()
-    {
-        return 'ok';
-    }
 }

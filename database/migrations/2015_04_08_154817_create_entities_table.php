@@ -16,6 +16,7 @@ class CreateEntitiesTable extends Migration {
         {
             $table->increments('id');
             $table->string('name');
+            $table->string('photo');
             $table->string('description');
             $table->text('body');
             $table->timestamps();

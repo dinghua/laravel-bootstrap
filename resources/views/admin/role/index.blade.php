@@ -35,8 +35,6 @@
                                                class="text-xs">编辑</a></li>
                                         <li><a href="/{{$controller->route.'/'.$model->id.'/delete'}}" href=""
                                                class="text-xs">删除</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/{{$controller->route.'/'.$model->id}}/permissions" class="text-xs">权限</a></li>
                                     </ul>
                                 </div>
                             </td>

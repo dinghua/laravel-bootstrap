@@ -11,7 +11,13 @@ class CustomerForm extends Form
             ->add('email', 'text')
             ->add('phone', 'text')
             ->add('address', 'text')
-            ->add('gender', 'choice')
+            ->add('gender', 'select', [
+                'choices'=>[
+                    ''=>'',
+                    '1'=>'Male',
+                    '2'=>'Female'
+                ]
+            ])
             ->add('birth', 'date')
             ->add('avatar', 'file')
             ->add('memo', 'textarea');
