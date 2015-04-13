@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('site_name')</title>
+    <title>@yield('title') | {{Lang::get('common.site_name')}} </title>
     @include('layouts.partials.styles')
     @yield('extend_styles')
 </head>
@@ -11,8 +11,13 @@
     @include('layouts.partials.header')
     @include('layouts.partials.aside')
     <div class="app-content">
-        <div class="wrapper-md">
-            @yield('content')
+        <div class="app-content-body ">
+            @yield('header')
+            <div class="wrapper-md">
+                @yield('breadcrumbs')
+
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>

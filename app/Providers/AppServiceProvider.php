@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'Chitunet\Services\Registrar'
 		);
+
+		if ($this->app->environment() == 'local') {
+			$this->app->register('Laracasts\Generators\GeneratorsServiceProvider');
+		}
 	}
 
 }

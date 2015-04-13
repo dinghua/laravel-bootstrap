@@ -6,13 +6,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="/{{$controller->route.'/create'}}" class="btn btn-default btn-xs pull-right">新建</a>
-                    用户
+                    {{Lang::get('common.'.$controller->name_key)}}
                 </div>
                 <table class="table table-striped m-b-none">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>名称</th>
+                        <th style="width: 20px;">#</th>
+                        <th style="width:30px;"></th>
+                        <th>姓名</th>
+                        <th>生日</th>
+                        <th>电话</th>
+                        <th>性别</th>
                         <th style="width: 70px"></th>
                     </tr>
                     </thead>
@@ -20,7 +24,12 @@
                     @foreach($models as $model)
                         <tr>
                             <td>{{$model->id}}</td>
-                            <td>{{$model->name}}</td>
+                            <td><img src="/{{$model->avatar}}" alt="{{$model->name}}" class="thumb-xxxs avatar"/></td>
+                            <td><a href="/{{$controller->route.'/'.$model->id}}">
+                                    {{$model->name}}</a></td>
+                            <td>{{$model->birth}}</td>
+                            <td>{{$model->phone}}</td>
+                            <td>{{$model->gender == 1 ? '男':'女'}}</td>
                             <td>
                                 <div class="dropdown">
                                     <a class="btn btn-default btn-xs" data-target="#" href="javascript:;"
@@ -33,8 +42,6 @@
                                                class="text-xs">编辑</a></li>
                                         <li><a href="/{{$controller->route.'/'.$model->id.'/delete'}}" href=""
                                                class="text-xs">删除</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="/{{$controller->route.'/'.$model->id}}" class="text-xs">查看</a></li>
                                     </ul>
                                 </div>
                             </td>

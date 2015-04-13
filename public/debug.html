@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<body ng-app="app">
+<script src="/packages/angular/angular.min.js"></script>
+<script src="/packages/angular/ui-grid.js"></script>
+<link rel="styleSheet" href="/packages/angular/ui-grid.min.css"/>
+
+<div ng-controller="MainCtrl">
+    <p><% label %></p>
+    <div ui-grid="{ data: myData }" class="grid"></div>
+</div>
+<script>
+    var app = angular.module('app', ['ui.grid'], function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    });
+
+    app.controller('MainCtrl', ['$scope', function ($scope) {
+        $scope.label = 'test123123';
+        $scope.myData = [
+            {
+                "firstName": "Cox",
+                "lastName": "Carney",
+                "company": "Enormo",
+                "employed": true
+            },
+            {
+                "firstName": "Lorraine",
+                "lastName": "Wise",
+                "company": "Comveyer",
+                "employed": false
+            },
+            {
+                "firstName": "Nancy",
+                "lastName": "Waters",
+                "company": "Fuelton",
+                "employed": false
+            }
+        ];
+    }]);
+</script>
+</body>
+</html>

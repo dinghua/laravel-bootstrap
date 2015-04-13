@@ -70,12 +70,11 @@ abstract class BaseAdminController extends BaseController {
         return view($this->view . '.index')->with(compact('models'));
     }
 
-    public function show()
+    public function show($id)
     {
         $this->_check('view');
-        $models = App::make($this->_modelName)->all();
-
-        return $models;
+        $model = App::make($this->_modelName)->findOrFail($id);
+        return view($this->view . '.show')->with(compact('model'));
     }
 
     public function create()

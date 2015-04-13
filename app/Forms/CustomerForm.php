@@ -19,7 +19,7 @@ class CustomerForm extends Form
                 ]
             ])
             ->add('birth', 'date')
-            ->add('avatar', 'file')
+            ->add('avatar', 'media')
             ->add('memo', 'textarea');
     }
 }

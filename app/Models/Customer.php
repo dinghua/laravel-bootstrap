@@ -13,4 +13,8 @@ class Customer extends Model {
 
     protected $table = 'customers';
     protected $fillable = [ 'name', 'email', 'phone', 'address', 'gender', 'birth', 'avatar', 'memo' ];
+    protected $hidden = ['address', 'avatar', 'memo', 'created_at', 'updated_at'];
+    public function groups(){
+        return $this->belongsToMany('Chitunet\Models\Group');
+    }
 }

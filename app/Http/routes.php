@@ -1,6 +1,8 @@
 <?php
 
 use Chitunet\Commands\SendEmail;
+use Chitunet\Models\Customer;
+use Chitunet\Models\Task;
 
 Route::get('/', function ()
 {
@@ -10,6 +12,7 @@ Route::get('/', function ()
     }
 
     return Redirect::to('admin/dashboard');
+
 });
 
 Route::controller('auth', 'AuthController');
@@ -21,11 +24,7 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
         return view('admin.dashboard');
     });
 
-    Route::get('console', function ()
-    {
-        return view('admin.console');
-    });
-
+    Route::controller('task', '\Chitunet\Http\Controllers\Admin\TaskController');
 
     Route::get('showPopup/{input_id}', '\Barryvdh\Elfinder\ElfinderController@showPopup');
 
@@ -39,10 +38,19 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
     Route::post('role_permissions', '\Chitunet\Http\Controllers\Admin\RoleController@postPermissions');
 
     Route::resource('entity', '\Chitunet\Http\Controllers\Admin\EntityController');
-    Route::get('customer/{id}/delete', '\Chitunet\Http\Controllers\Admin\CustomerController@destroy');
+    Route::get('entity/{id}/delete', '\Chitunet\Http\Controllers\Admin\EntityController@destroy');
 
     Route::resource('customer', '\Chitunet\Http\Controllers\Admin\CustomerController');
-    Route::get('entity/{id}/delete', '\Chitunet\Http\Controllers\Admin\EntityController@destroy');
+    Route::get('customer/{id}/delete', '\Chitunet\Http\Controllers\Admin\CustomerController@destroy');
+
+    Route::resource('group', '\Chitunet\Http\Controllers\Admin\GroupController');
+    Route::get('group/{id}/delete', '\Chitunet\Http\Controllers\Admin\GroupController@destroy');
+
+});
+
+Route::group([ 'prefix' => 'api', 'middleware' => 'admin' ], function ()
+{
+    Route::get('group/{id}/customers.json', '\Chitunet\Http\Controllers\Admin\GroupController@apiCustomers');
 });
 
 // debug for templates
@@ -52,11 +60,8 @@ Route::any('job', 'JobController@start');
 
 Route::get('debug', function ()
 {
-    $message = [
-        'title' => '111111111',
-        'time'  => time()
-    ];
-    Queue::push(new SendEmail(), 'hello2');
-    Log::info('push job.'.$message['time']);
+    $task = Task::find(4);
+    $jobs = $task->jobRoute(1);
+    return $jobs;
 
 });

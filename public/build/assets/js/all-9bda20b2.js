@@ -35,6 +35,8 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
             var $target = $($this.attr('target')) || $this;
             $target.toggleClass($this.attr('ui-toggle'));
         });
+
+        $('.dropdown-toggle').dropdown();
     });
 }(jQuery);
 

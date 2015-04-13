@@ -23,6 +23,13 @@
                     </li>
 
                     <li>
+                        <a href="/admin/group">
+                            <i class="fa fa-users"></i>
+                            <span>客户组</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a class="auto">
                               <span class="pull-right text-muted">
                                 <i class="fa fa-fw fa-angle-right text"></i>

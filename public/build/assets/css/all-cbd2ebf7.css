@@ -4085,7 +4085,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: #f0f3f4;
+  background-color: #ffffff;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -12887,6 +12887,10 @@ a.text-#000000:hover {
 }
 .thumb-xxs {
   width: 30px;
+  display: inline-block;
+}
+.thumb-xxxs {
+  width: 20px;
   display: inline-block;
 }
 .thumb-wrapper {

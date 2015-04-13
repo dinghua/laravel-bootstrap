@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Log;
 
 class Kernel extends ConsoleKernel {
 
@@ -11,7 +12,8 @@ class Kernel extends ConsoleKernel {
 	 * @var array
 	 */
 	protected $commands = [
-		'Chitunet\Console\Commands\Inspire',
+        //'Chitunet\Console\Commands\CleanData',
+        'Chitunet\Console\Commands\SendEmail',
 	];
 
 	/**
@@ -22,8 +24,8 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		$schedule->command('inspire')
-				 ->hourly();
+		//$schedule->command('clean_data')->daily();
+        $schedule->command('send_email');
 	}
 
 }

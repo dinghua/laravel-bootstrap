@@ -22,7 +22,7 @@ class PermissionRequest extends Request {
     public function rules()
     {
         return [
-            'name'         => 'required',
+            'name'         => 'required|unique:permissions',
             'display_name' => 'required'
         ];
     }

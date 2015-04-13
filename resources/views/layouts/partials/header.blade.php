@@ -33,17 +33,11 @@
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                     <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-                    <span translate="header.navbar.new.NEW">新建</span> <span class="caret"></span>
+                    <span>新建</span> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#" translate="header.navbar.new.PROJECT">Projects</a></li>
-                    <li>
-                        <a href="">
-                            <span class="badge bg-info pull-right">5</span>
-                            <span translate="header.navbar.new.TASK">Task</span>
-                        </a>
-                    </li>
-                    <li><a href="" translate="header.navbar.new.USER">User</a></li>
+                    <li><a href="/admin/permission/create" >权限</a></li>
+                    <li><a href="/admin/role/create" >角色</a></li>
                     <li class="divider"></li>
                     <li>
                         <a href="">
@@ -59,75 +53,13 @@
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                    <i class="icon-bell fa-fw"></i>
-                    <span class="visible-xs-inline">Notifications</span>
-                    <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
-                </a>
-                <!-- dropdown -->
-                <div class="dropdown-menu w-xl animated fadeInUp">
-                    <div class="panel bg-white">
-                        <div class="panel-heading b-light bg-light">
-                            <strong>You have <span>2</span> notifications</strong>
-                        </div>
-                        <div class="list-group">
-                            <a href="" class="media list-group-item">
-                    <span class="pull-left thumb-sm">
-                      <img src="" alt="..." class="img-circle">
-                    </span>
-                    <span class="media-body block m-b-none">
-                      Use awesome animate.css<br>
-                      <small class="text-muted">10 minutes ago</small>
-                    </span>
-                            </a>
-                            <a href="" class="media list-group-item">
-                    <span class="media-body block m-b-none">
-                      1.0 initial released<br>
-                      <small class="text-muted">1 hour ago</small>
-                    </span>
-                            </a>
-                        </div>
-                        <div class="panel-footer text-sm">
-                            <a href="" class="pull-right"><i class="fa fa-cog"></i></a>
-                            <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- / dropdown -->
-            </li>
-            <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle clear">
                     <span class="hidden-sm hidden-md">{{Auth::user()->name}}</span> <b class="caret"></b>
                 </a>
                 <!-- dropdown -->
                 <ul class="dropdown-menu animated fadeInRight w">
-                    <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                        <div>
-                            <p>300mb of 500mb used</p>
-                        </div>
-                        <div class="progress progress-xs m-b-none dker">
-                            <div class="progress-bar progress-bar-info" data-toggle="tooltip" data-original-title="50%"
-                                 style="width: 50%"></div>
-                        </div>
-                    </li>
                     <li>
-                        <a href="">
-                            <span class="badge bg-danger pull-right">30%</span>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a ui-sref="app.page.profile">Profile</a>
-                    </li>
-                    <li>
-                        <a ui-sref="app.docs">
-                            <span class="label bg-info pull-right">new</span>
-                            Help
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="/auth/logout">Logout</a>
+                        <a href="/auth/logout">注销</a>
                     </li>
                 </ul>
                 <!-- / dropdown -->
