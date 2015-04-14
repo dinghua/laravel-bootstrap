@@ -1,6 +1,7 @@
 <?php namespace Chitunet\Http\Controllers\Admin;
 
 use Chitunet\Interfaces\IEntity;
+use Chitunet\Models\Customer;
 use Chitunet\Models\Group;
 use Chitunet\Models\Permission;
 use Chitunet\Models\Role;
@@ -25,8 +26,8 @@ class GroupController extends BaseAdminController implements IEntity {
     public function apiCustomers($id)
     {
         $model     = Group::findOrFail($id);
-        $customers = $model->customers;
-
-        return Response::json($customers);
+        $customers = $model->customers();
+        $customers = $model->customers();
+        return \Datatables::of($customers)->make();
     }
 }

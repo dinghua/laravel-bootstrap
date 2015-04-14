@@ -77,37 +77,41 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="tab-pane" id="tab2">
-                    <div class="table-responsive"  >
-                        <div ui-grid="gridOptionsUser" ui-grid-auto-resize></div>
+                    <div class="m-b">
+                        <button class="btn btn-default btn-sm btn-rounded font-bold">添加客户</button>
                     </div>
+                    <table id="users" class="table table-hover table-responsive">
+                        <thead>
+                        <tr>
+                            <th class="col-md-1">{{{ Lang::get('users.name') }}}</th>
+                            <th class="col-md-3">{{{ Lang::get('users.gender') }}}</th>
+                            <th class="col-md-3">{{{ Lang::get('users.birth') }}}</th>
+                            <th class="col-md-3">{{{ Lang::get('users.created_at') }}}</th>
+                        </tr>
+                        </thead>
+                    </table>
+
                 </div>
+
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('extend_scripts')
-    <script src="/packages/angular/angular.min.js"></script>
-    <script src="/packages/angular/angular-ui-grid/ui-grid.min.js"></script>
-    <link rel="stylesheet" href="/packages/angular/angular-ui-grid/ui-grid.min.css"/>
+    <script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="http://localhost/admin/angulr/src/vendor/jquery/datatables/dataTables.bootstrap.css"/>
     <script>
-        var app = angular.module('app', ['ui.grid', 'ui.grid.autoResize'], function ($interpolateProvider) {
-            $interpolateProvider.startSymbol('<%');
-	        $interpolateProvider.endSymbol('%>');
-        });
-        app.controller('groupController', ['$scope', '$http', function ($scope, $http) {
-            $scope.gridOptionsUser = {
-                data: [
-                   ]
-            };
 
-            $http.get('/api/group/1/customers.json')
-                    .success(function(data) {
-                        $scope.gridOptionsUser.data = data;
-                    });
-        }]);
-        console.info(app);
+
+        $(document).ready(function() {
+            oTable = $('#users').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "/api/group/1/customers.json"
+            });
+        });
     </script>
 @endsection

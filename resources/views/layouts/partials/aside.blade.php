@@ -63,7 +63,7 @@
                     </li>
 
                     <li>
-                        <a href="/admin/console">
+                        <a href="/admin/task">
                             <i class="fa fa-tasks"></i>
                             <span>任务管理</span>
                         </a>
@@ -76,12 +76,6 @@
                         <span>设置</span>
                     </li>
 
-                    <li>
-                        <a href="/admin/menu">
-                            <i class="fa fa-navicon"></i>
-                            <span>菜单设置</span>
-                        </a>
-                    </li>
                     <li>
                         <a class="auto">
                               <span class="pull-right text-muted">
@@ -108,12 +102,6 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="/admin/settings">
-                            <i class="fa fa-gear"></i>
-                            <span>系统设置</span>
-                        </a>
                     </li>
                     <li>
                         <a class="auto">

@@ -148,6 +148,7 @@ return [
         'Illuminate\Html\HtmlServiceProvider',
         'Kris\LaravelFormBuilder\FormBuilderServiceProvider',
         'Barryvdh\Elfinder\ElfinderServiceProvider',
+        'yajra\Datatables\DatatablesServiceProvider',
     ],
 
     /*
@@ -198,7 +199,8 @@ return [
         'Entrust'     => 'Zizaco\Entrust\EntrustFacade',
         'Form'        => 'Illuminate\Html\FormFacade',
         'Html'        => 'Illuminate\Html\HtmlFacade',
-        'FormBuilder' => 'Kris\LaravelFormBuilder\Facades\FormBuilder'
+        'FormBuilder' => 'Kris\LaravelFormBuilder\Facades\FormBuilder',
+        'Datatables'  => 'yajra\Datatables\Datatables',
     ],
 
 ];
