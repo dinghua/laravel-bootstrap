@@ -1,16 +1,34 @@
-## 使用说明
+## Chitunet Bootstrap 使用说明
 
 ### 安装
+- clone code
+- `composer install`
+- `php artisan migrate`
+- `php artisan db:seed`
 
-### 初始化
+### 权限管理 (https://github.com/Zizaco/entrust)
+- 添加权限
+- 分配权限
+- 使用权限
 
-### 添加对象
-- 添加表
-- 添加Admin Controller
-- 添加表单
-- 添加页面模版
-- 添加关联
-- 添加路由
+### 对象管理
+- 添加 Database (database/migrations)
+- 添加 Model (app/Models)
+- 添加 Admin Controller (app/Http/Controllers)
+- 添加 Form  (app/Forms)
+- 添加 Request  (app/Http/Requests)
+- 添加 View (resource/views)
+- 添加 Routes (app/Http/routes.php)
+- 添加菜单
+
+### 任务管理
+- 添加任务
+- 执行任务
+- 管理任务
+
+### 多语言
+
+
 
 
 
