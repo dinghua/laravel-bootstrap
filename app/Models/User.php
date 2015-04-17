@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use EntrustUserTrait;
 
     protected $table = 'users';
-    protected $fillable = [ 'email', 'name' ];
+    protected $fillable = [ 'email', 'name', 'password' ];
     protected $hidden = [ 'password', 'remember_token' ];
 
     public function profile($key = NULL)
