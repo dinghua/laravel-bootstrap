@@ -31,15 +31,45 @@ class DatabaseSeeder extends Seeder {
         $admin->save();
         echo "admin role created\n";
 
+        $user=new Chitunet\Models\User();
+        $user->name='admin';
+        $user->email='admin@me.com';
+        $user->password=Hash::make('admin');
+        $user->save();
+        $user->attachRole($admin->id);
+        echo "add admin user\n";
+
         $manage_users = new \Chitunet\Models\Permission();
         $manage_users->name = 'manage_users';
-        $manage_users->display_name = 'Edit Users'; // optional
+        $manage_users->display_name = '管理用户  '; // optional
         $manage_users->description  = 'edit existing users'; // optional
         $manage_users->save();
         echo "manager user permission created\n";
         $admin->attachPermission($manage_users);
         echo "add attach to admin role\n";
+
+
+        $manage_permission = new \Chitunet\Models\Permission();
+        $manage_permission->name = 'manage_permission';
+        $manage_permission->display_name = '权限管理  '; // optional
+        $manage_permission->description  = 'show entity list'; // optional
+        $manage_permission->save();
+        echo "manager user permission created\n";
+        $admin->attachPermission($manage_permission);
+        echo "add attach to admin role\n";
+
+
+        $manage_role = new \Chitunet\Models\Permission();
+        $manage_role->name = 'manage_role';
+        $manage_role->display_name = '角色管理  '; // optional
+        $manage_role->description  = 'show entity list'; // optional
+        $manage_role->save();
+        echo "manager user permission created\n";
+        $admin->attachPermission($manage_role);
+        echo "add attach to admin role\n";
         return TRUE;
+
+
     }
 
 }

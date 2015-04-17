@@ -47,7 +47,7 @@ class Administrator {
 
         if (!$user->ability('admin',[]))
         {
-            return response('Unauthorized.', 401);
+            return response('not admin.', 401);
         }
 
         return $next($request);
