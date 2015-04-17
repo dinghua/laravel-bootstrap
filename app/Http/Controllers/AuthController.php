@@ -1,5 +1,6 @@
 <?php namespace Chitunet\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
@@ -57,6 +58,8 @@ class AuthController extends Controller {
 
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
+            $this->auth->user()->login_at = Carbon::now();
+            $this->auth->user()->save();
             return redirect()->intended($this->redirectPath());
         }
 

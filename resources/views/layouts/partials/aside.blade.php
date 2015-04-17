@@ -101,6 +101,11 @@
                                     <span>权限分配</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/admin/user">
+                                    <span>用户管理</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>

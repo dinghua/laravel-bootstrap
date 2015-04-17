@@ -39,9 +39,9 @@ abstract class BaseAdminController extends BaseController {
      */
     public $model;
 
-    private $_modelName = '';
-    private $_formName = '';
-    private $_requestName = '';
+    protected $_modelName = '';
+    protected $_formName = '';
+    protected $_requestName = '';
     public $formBuilder;
     public $request;
 

@@ -9,6 +9,8 @@ return [
     'username'  => '用户名',
     'password'  => '密码',
 
-    'customer'  => '用户',
+    'customer'  => '客户',
     'group'     => '用户组',
+
+    'user'      => '用户',
 ];

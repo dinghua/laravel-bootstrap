@@ -46,11 +46,20 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
     Route::resource('group', '\Chitunet\Http\Controllers\Admin\GroupController');
     Route::get('group/{id}/delete', '\Chitunet\Http\Controllers\Admin\GroupController@destroy');
 
+    Route::resource('user', '\Chitunet\Http\Controllers\Admin\UserController');
+    Route::get('user/{id}/delete', '\Chitunet\Http\Controllers\Admin\UserController@destroy');
+
 });
 
 Route::group([ 'prefix' => 'api', 'middleware' => 'admin' ], function ()
 {
     Route::get('group/{id}/customers.json', '\Chitunet\Http\Controllers\Admin\GroupController@apiCustomers');
+    Route::get('user/{id}/roles.json', '\Chitunet\Http\Controllers\Admin\UserController@apiRoles');
+
+    Route::post('user/{id}/attach/{relation}', '\Chitunet\Http\Controllers\Admin\UserController@postAttach');
+    Route::post('user/{id}/detach/{relation}', '\Chitunet\Http\Controllers\Admin\UserController@postDetach');
+
+    Route::controller('choose', '\Chitunet\Http\Controllers\Api\ChooserController');
 });
 
 // debug for templates
@@ -60,8 +69,8 @@ Route::any('job', 'JobController@start');
 
 Route::get('debug', function ()
 {
-    $task = Task::find(4);
-    $jobs = $task->jobRoute(1);
-    return $jobs;
-
+    $therelationname = 'roles';
+    $user = \Illuminate\Support\Facades\Auth::user();
+    $user->$therelationname()->detach([2]);
+    return $user->$therelationname;
 });
