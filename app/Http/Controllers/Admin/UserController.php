@@ -33,8 +33,10 @@ class UserController extends BaseAdminController implements IEntity {
         return FALSE;
     }
 
+    private $_id;
     public function apiRoles($id)
     {
+        $this->_id = $id;
         $model = User::findOrFail($id);
         $roles = $model->roles;
         return Datatable::collection($roles)
@@ -42,7 +44,7 @@ class UserController extends BaseAdminController implements IEntity {
             ->addColumn('action',function($model)
             {
                 return <<<ACTION
-<button class="btn btn-danger btn-xs" onclick="detach({$model->id})">删除</button>
+<button class="btn btn-danger btn-xs" id="detach-{$model->id}" data-id="{$model->id}" data-url="/api/user/{$this->_id}/detach/roles" onclick="$.detach({$model->id})">删除</button>
 ACTION;
             }
             )

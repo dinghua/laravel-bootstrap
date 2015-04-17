@@ -69,9 +69,13 @@
     });
 
     $.extend({
-        detach: function (id) {
+        detach: function (btn_id) {
+
+            var btn = $("#detach-" + btn_id);
+            var url = btn.attr("data-url");
+            var id = btn.attr("data-id");
             $.ajax({
-                url: '/api/user/{{$model->id}}/detach/roles',
+                url: url,
                 method: 'post',
                 data: {ids: [id], _token: token},
                 success: function (data) {
