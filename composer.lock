@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d217eefed2c9793ceccac7381b57735b",
+    "hash": "6bb265f8080ffe4d32a260991642949c",
     "packages": [
         {
             "name": "barryvdh/elfinder-builds",
@@ -164,6 +164,59 @@
                 "tinymce"
             ],
             "time": "2015-04-09 11:18:10"
+        },
+        {
+            "name": "chumper/datatable",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chumper/Datatable.git",
+                "reference": "bdd90cbe65b3544761f69ea199a1b9591770f3fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chumper/Datatable/zipball/bdd90cbe65b3544761f69ea199a1b9591770f3fc",
+                "reference": "bdd90cbe65b3544761f69ea199a1b9591770f3fc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.0",
+                "illuminate/support": "~5.0",
+                "illuminate/view": "~5.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "orchestra/testbench": "2.1.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Chumper\\Datatable": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Plaschke",
+                    "email": "github@nilsplaschke.de",
+                    "homepage": "http://nilsplaschke.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is a laravel 4 package for the server and client side of datatablaes at http://datatables.net/",
+            "homepage": "http://github.com/Chumper/datatable",
+            "keywords": [
+                "ajax",
+                "datatables",
+                "jquery",
+                "laravel"
+            ],
+            "time": "2015-04-08 12:11:23"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -671,16 +724,16 @@
         },
         {
             "name": "kris/laravel-form-builder",
-            "version": "1.4.03",
+            "version": "1.4.06",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristijanhusak/laravel-form-builder.git",
-                "reference": "ce6af1822ca6a145c3c2f590a2894235ebb63a04"
+                "reference": "502bdd8788ffda0232e0d6dbe4c2f7184c9c669f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/ce6af1822ca6a145c3c2f590a2894235ebb63a04",
-                "reference": "ce6af1822ca6a145c3c2f590a2894235ebb63a04",
+                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/502bdd8788ffda0232e0d6dbe4c2f7184c9c669f",
+                "reference": "502bdd8788ffda0232e0d6dbe4c2f7184c9c669f",
                 "shasum": ""
             },
             "require": {
@@ -719,7 +772,7 @@
                 }
             ],
             "description": "Laravel form builder - symfony like",
-            "time": "2015-04-02 09:25:28"
+            "time": "2015-04-15 20:29:01"
         },
         {
             "name": "laravel/framework",
@@ -2115,16 +2168,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v4.1.4",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables-oracle.git",
-                "reference": "0db4d809d68b7e94a3fc1483e2d525c860b3d634"
+                "reference": "350396f33862fd62653131e9e09194f25e3f6363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables-oracle/zipball/0db4d809d68b7e94a3fc1483e2d525c860b3d634",
-                "reference": "0db4d809d68b7e94a3fc1483e2d525c860b3d634",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables-oracle/zipball/350396f33862fd62653131e9e09194f25e3f6363",
+                "reference": "350396f33862fd62653131e9e09194f25e3f6363",
                 "shasum": ""
             },
             "require": {
@@ -2164,7 +2217,7 @@
                 "laravel4",
                 "laravel5"
             ],
-            "time": "2015-04-08 07:33:40"
+            "time": "2015-04-14 07:56:59"
         },
         {
             "name": "zizaco/entrust",
@@ -3350,7 +3403,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "zizaco/entrust": 20
+        "zizaco/entrust": 20,
+        "chumper/datatable": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -82,16 +82,14 @@
                     <div class="m-b">
                         <button class="btn btn-default btn-sm btn-rounded font-bold">添加客户</button>
                     </div>
-                    <table id="users" class="table table-hover table-responsive">
-                        <thead>
-                        <tr>
-                            <th class="col-md-1">{{{ Lang::get('users.name') }}}</th>
-                            <th class="col-md-3">{{{ Lang::get('users.gender') }}}</th>
-                            <th class="col-md-3">{{{ Lang::get('users.birth') }}}</th>
-                            <th class="col-md-3">{{{ Lang::get('users.created_at') }}}</th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <?php
+                    $table = Datatable::table()
+                    ->addColumn('#', '姓名', '性别', '手机号', 'action')
+                    ->setUrl(URL::to('/api/group/'.$model->id.'/customers.json'))
+                    ->noScript();
+                    // to render the table:
+                    echo $table->render();
+                    ?>
 
                 </div>
 
@@ -101,17 +99,8 @@
 @endsection
 
 @section('extend_scripts')
-    <script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="http://localhost/admin/angulr/src/vendor/jquery/datatables/dataTables.bootstrap.css"/>
-    <script>
-
-
-        $(document).ready(function() {
-            oTable = $('#users').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": "/api/group/1/customers.json"
-            });
-        });
-    </script>
+    <script src="/packages/datatables/jquery.dataTables.min.js"></script>
+    <script src="/packages/datatables/dataTables.bootstrap.js"></script>
+    <link href="/packages/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    {!! $table->script(); !!}
 @endsection

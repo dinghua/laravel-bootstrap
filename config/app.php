@@ -148,7 +148,7 @@ return [
         'Illuminate\Html\HtmlServiceProvider',
         'Kris\LaravelFormBuilder\FormBuilderServiceProvider',
         'Barryvdh\Elfinder\ElfinderServiceProvider',
-        'yajra\Datatables\DatatablesServiceProvider',
+        'Chumper\Datatable\DatatableServiceProvider',
     ],
 
     /*
@@ -200,7 +200,7 @@ return [
         'Form'        => 'Illuminate\Html\FormFacade',
         'Html'        => 'Illuminate\Html\HtmlFacade',
         'FormBuilder' => 'Kris\LaravelFormBuilder\Facades\FormBuilder',
-        'Datatables'  => 'yajra\Datatables\Datatables',
+        'Datatable'   => 'Chumper\Datatable\Facades\DatatableFacade',
     ],
 
 ];

@@ -3,8 +3,7 @@
 use Chitunet\Interfaces\IEntity;
 use Chitunet\Models\Customer;
 use Chitunet\Models\Group;
-use Chitunet\Models\Permission;
-use Chitunet\Models\Role;
+use Datatable;
 use Response;
 
 /**
@@ -26,8 +25,15 @@ class GroupController extends BaseAdminController implements IEntity {
     public function apiCustomers($id)
     {
         $model     = Group::findOrFail($id);
-        $customers = $model->customers();
-        $customers = $model->customers();
-        return \Datatables::of($customers)->make();
+        $customers = $model->customers;
+        return Datatable::collection($customers)
+            ->showColumns('id', 'name', 'gender', 'phone')
+            ->addColumn('action',function($model)
+            {
+                return <<<ACTION
+<a href="/admin/customer/{$model->id}" class="btn btn-danger btn-xs">查看</a>
+ACTION;
+            })
+            ->make();
     }
 }
