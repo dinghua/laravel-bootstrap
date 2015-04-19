@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder {
         $user=new Chitunet\Models\User();
         $user->name='admin';
         $user->email='admin@me.com';
-        $user->password=Hash::make('admin');
+        $user->password='admin';
         $user->save();
         $user->attachRole($admin->id);
         echo "add admin user\n";

@@ -61,6 +61,13 @@ class Form
     protected $formBuilder;
 
     /**
+     * List of fields to not render
+     *
+     * @var array
+     **/
+    protected $exclude = [];
+
+    /**
      * Build the form
      *
      * @return mixed
@@ -188,6 +195,31 @@ class Form
     public function renderRest($showFormEnd = true, $showFields = true)
     {
         $fields = $this->getUnrenderedFields();
+
+        return $this->render([], $fields, false, $showFields, $showFormEnd);
+    }
+
+    /**
+     * Renders the rest of the form up until the specified field name
+     *
+     * @param string $field_name
+     * @param bool   $showFormEnd
+     * @param bool   $showFields
+     * @return string
+     */
+    public function renderUntil($field_name, $showFormEnd = true, $showFields = true)
+    {
+        $fields = $this->getUnrenderedFields();
+
+        $i = 1;
+        foreach ($fields as $key => $value) {
+            if ($value->getName() == $field_name) {
+                break;
+            }
+            $i++;
+        }
+
+        $fields = array_slice($fields, 0, $i, true);
 
         return $this->render([], $fields, false, $showFields, $showFormEnd);
     }
@@ -364,6 +396,7 @@ class Form
     {
         $this->model = $model;
 
+        $this->setupNamedModel();
         // Rebuild so new data is bound to the fields
         $this->rebuildFields();
 
@@ -455,8 +488,12 @@ class Form
      * @param null   $default
      * @return mixed
      */
-    public function getData($name, $default = null)
+    public function getData($name = null, $default = null)
     {
+        if (is_null($name)) {
+            return $this->data;
+        }
+
         return array_get($this->data, $name, $default);
     }
 
@@ -507,6 +544,7 @@ class Form
             ->with('formOptions', $formOptions)
             ->with('fields', $fields)
             ->with('model', $this->getModel())
+            ->with('exclude', $this->exclude)
             ->render();
     }
 
@@ -658,5 +696,18 @@ class Form
     public function getFormBuilder()
     {
         return $this->formBuilder;
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     * @author 
+     **/
+    public function exclude(array $fields)
+    {
+        $this->exclude = array_merge($this->exclude, $fields);
+
+        return $this;
     }
 }
