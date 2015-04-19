@@ -67,6 +67,24 @@ class DatabaseSeeder extends Seeder {
         echo "manager user permission created\n";
         $admin->attachPermission($manage_role);
         echo "add attach to admin role\n";
+
+        $manage_group = new \Chitunet\Models\Permission();
+        $manage_group->name = 'manage_group';
+        $manage_group->display_name = '客户组管理  '; // optional
+        $manage_group->description  = 'show entity list'; // optional
+        $manage_group->save();
+        echo "manager group permission created\n";
+        $admin->attachPermission($manage_group);
+        echo "add attach to admin group\n";
+
+        $manage_customer = new \Chitunet\Models\Permission();
+        $manage_customer->name = 'manage_customer';
+        $manage_customer->display_name = '客户管理  '; // optional
+        $manage_customer->description  = 'show entity list'; // optional
+        $manage_customer->save();
+        echo "manager customer permission created\n";
+        $admin->attachPermission($manage_customer);
+        echo "add attach to admin customer\n";
         return TRUE;
 
 

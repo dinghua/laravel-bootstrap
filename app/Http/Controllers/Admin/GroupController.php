@@ -5,6 +5,7 @@ use Chitunet\Models\Customer;
 use Chitunet\Models\Group;
 use Datatable;
 use Response;
+use Entrust;
 
 /**
  * Created by chitunet.com
@@ -35,5 +36,14 @@ class GroupController extends BaseAdminController implements IEntity {
 ACTION;
             })
             ->make();
+    }
+    public function check($action)
+    {
+        if (Entrust::can('manage_group'))
+        {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }
