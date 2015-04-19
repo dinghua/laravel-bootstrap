@@ -14,6 +14,7 @@
                         <th>#</th>
                         <th>名称</th>
                         <th>显示名称</th>
+                        <th>描述</th>
                         <th style="width: 70px"></th>
                     </tr>
                     </thead>
@@ -23,6 +24,7 @@
                             <td>{{$model->id}}</td>
                             <td>{{$model->name}}</td>
                             <td>{{$model->display_name}}</td>
+                            <td>{{$model->description}}</td>
                             <td>
                                 <div class="dropdown">
                                     <a class="btn btn-default btn-xs" data-target="#" href="javascript:;"
