@@ -37,13 +37,5 @@ ACTION;
             })
             ->make();
     }
-    public function check($action)
-    {
-        if (Entrust::can('manage_group'))
-        {
-            return TRUE;
-        }
 
-        return FALSE;
-    }
 }

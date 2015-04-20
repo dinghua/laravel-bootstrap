@@ -20,13 +20,5 @@ class CustomerController extends BaseAdminController implements IEntity {
         'name_key' => 'customer',
         'view'     => 'admin.customer'
     ];
-    public function check($action)
-    {
-        if (Entrust::can('manage_customer'))
-        {
-            return TRUE;
-        }
 
-        return FALSE;
-    }
 }
