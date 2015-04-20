@@ -5,6 +5,7 @@ use Chitunet\Models\Customer;
 use Chitunet\Models\Group;
 use Datatable;
 use Response;
+use Entrust;
 
 /**
  * Created by chitunet.com
@@ -36,4 +37,5 @@ ACTION;
             })
             ->make();
     }
+
 }
