@@ -12,7 +12,6 @@ class Kernel extends ConsoleKernel {
 	 * @var array
 	 */
 	protected $commands = [
-        //'Chitunet\Console\Commands\CleanData',
         'Chitunet\Console\Commands\SendEmail',
 	];
 
@@ -24,8 +23,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
-		//$schedule->command('clean_data')->daily();
-        $schedule->command('send_email');
+        $schedule->command('send_email')->everyFiveMinutes();
 	}
 
 }

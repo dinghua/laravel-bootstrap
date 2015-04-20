@@ -69,6 +69,6 @@ class SendEmail extends Command {
                 break;
             }
         }
-        return;
+        return TRUE;
     }
 }

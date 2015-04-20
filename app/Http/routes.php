@@ -1,7 +1,6 @@
 <?php
 
-use Chitunet\Commands\SendEmail;
-use Chitunet\Models\Customer;
+use Chitunet\Console\Commands\SendEmail;
 use Chitunet\Models\Task;
 
 Route::get('/', function ()
@@ -69,8 +68,13 @@ Route::any('job', 'JobController@start');
 
 Route::get('debug', function ()
 {
-    $therelationname = 'roles';
-    $user = \Illuminate\Support\Facades\Auth::user();
-    $user->$therelationname()->detach([2]);
-    return $user->$therelationname;
+    $task         = new Task();
+    $task->name   = 'debug';
+    $task->tube   = 'send_email';
+    $task->module = 'JobSendEmail';
+    $task->save();
+
+    $result = SendEmail::push($task);
+    dd($result);
 });
+
