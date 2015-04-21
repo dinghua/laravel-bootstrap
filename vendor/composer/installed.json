@@ -3326,60 +3326,6 @@
         ]
     },
     {
-        "name": "kris/laravel-form-builder",
-        "version": "1.4.11",
-        "version_normalized": "1.4.11.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kristijanhusak/laravel-form-builder.git",
-            "reference": "411977e338cb33ab567efae3daea1a2f81f56bce"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/411977e338cb33ab567efae3daea1a2f81f56bce",
-            "reference": "411977e338cb33ab567efae3daea1a2f81f56bce",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/html": "5.0.*@dev",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "mockery/mockery": "0.9.*",
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2015-04-18 11:42:48",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.4.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Kris\\LaravelFormBuilder": "src/"
-            },
-            "classmap": [
-                "tests/FormBuilderTestCase.php"
-            ],
-            "files": [
-                "src/helpers.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Kristijan Husak",
-                "email": "husakkristijan@gmail.com"
-            }
-        ],
-        "description": "Laravel form builder - symfony like"
-    },
-    {
         "name": "phpspec/phpspec",
         "version": "2.2.0",
         "version_normalized": "2.2.0.0",
@@ -3458,5 +3404,59 @@
             "testing",
             "tests"
         ]
+    },
+    {
+        "name": "kris/laravel-form-builder",
+        "version": "1.4.12",
+        "version_normalized": "1.4.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kristijanhusak/laravel-form-builder.git",
+            "reference": "50dfaa764d05f69cbd7d72db84cb8bf5714cdc90"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/50dfaa764d05f69cbd7d72db84cb8bf5714cdc90",
+            "reference": "50dfaa764d05f69cbd7d72db84cb8bf5714cdc90",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/html": "5.0.*@dev",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.9.*",
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2015-04-19 20:27:01",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Kris\\LaravelFormBuilder": "src/"
+            },
+            "classmap": [
+                "tests/FormBuilderTestCase.php"
+            ],
+            "files": [
+                "src/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kristijan Husak",
+                "email": "husakkristijan@gmail.com"
+            }
+        ],
+        "description": "Laravel form builder - symfony like"
     }
 ]

@@ -120,9 +120,10 @@ abstract class BaseAdminController extends BaseController {
         return view($this->route . '.form')->with(compact('form'));
     }
 
-    public function update($id, Request $request)
+    public function update($id)
     {
         $this->_check('edit');
+        $request = $this->getRequest();
         $this->save($request->input(), $id);
 
         return Redirect::to($this->route);
@@ -179,11 +180,16 @@ abstract class BaseAdminController extends BaseController {
     }
 
     public function getRequest(){
+        $this->beforeGetRequest();
         if(class_exists($this->_requestName)){
             return App::make($this->_requestName);
         }else{
             return new Request();
         }
+    }
+
+    public function beforeRequest(){
+        return true;
     }
 
     public function __call($method, $param)

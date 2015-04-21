@@ -54,6 +54,7 @@ return array(
     'Chitunet\\Http\\Requests\\GroupRequest' => $baseDir . '/app/Http/Requests/GroupRequest.php',
     'Chitunet\\Http\\Requests\\PermissionRequest' => $baseDir . '/app/Http/Requests/PermissionRequest.php',
     'Chitunet\\Http\\Requests\\Request' => $baseDir . '/app/Http/Requests/Request.php',
+    'Chitunet\\Http\\Requests\\RoleRequest' => $baseDir . '/app/Http/Requests/RoleRequest.php',
     'Chitunet\\Interfaces\\IEntity' => $baseDir . '/app/Interfaces/IEntity.php',
     'Chitunet\\Interfaces\\IRepository' => $baseDir . '/app/Interfaces/IRepository.php',
     'Chitunet\\Models\\BaseJob' => $baseDir . '/app/Models/BaseJob.php',
