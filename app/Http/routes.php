@@ -59,6 +59,8 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'admin' ], function ()
     Route::post('user/{id}/detach/{relation}', '\Chitunet\Http\Controllers\Admin\UserController@postDetach');
 
     Route::controller('choose', '\Chitunet\Http\Controllers\Api\ChooserController');
+
+    Route::post('sms', '@');
 });
 
 // debug for templates
