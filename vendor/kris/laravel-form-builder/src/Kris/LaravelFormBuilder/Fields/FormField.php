@@ -56,6 +56,31 @@ abstract class FormField
     protected $formHelper;
 
     /**
+     * Name of the property for value setting
+     *
+     * @var string
+     */
+    protected $valueProperty = 'value';
+
+    /**
+     * Name of the property for default value
+     *
+     * @var string
+     */
+    protected $defaultValueProperty = 'default_value';
+
+    /**
+     * Is default value set?
+     * @var bool
+     */
+    protected $hasDefault = false;
+
+    /**
+     * @var \Closure|null
+     */
+    protected $valueClosure = null;
+
+    /**
      * @param             $name
      * @param             $type
      * @param Form        $parent
@@ -69,6 +94,23 @@ abstract class FormField
         $this->formHelper = $this->parent->getFormHelper();
         $this->setTemplate();
         $this->setDefaultOptions($options);
+        $this->setupValue();
+    }
+
+    protected function setupValue()
+    {
+        $value = $this->getOption($this->valueProperty);
+        $isChild = $this->getOption('is_child');
+
+        if ($value instanceof \Closure) {
+            $this->valueClosure = $value;
+        }
+
+        if (($value === false || $value === null || $value instanceof \Closure) && !$isChild) {
+            $this->setValue($this->getModelValueAttribute($this->parent->getModel(), $this->name));
+        } elseif (!$isChild) {
+            $this->hasDefault = true;
+        }
     }
 
     /**
@@ -87,11 +129,28 @@ abstract class FormField
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
+        $val = null;
+        $value = array_get($options, $this->valueProperty);
+        $defaultValue = array_get($options, $this->defaultValueProperty);
+
         if ($showField) {
             $this->rendered = true;
         }
 
+        // Check if default value is passed to render function from view.
+        // If it is, we save it to a variable and then override it before
+        // rendering the view
+        if ($value) {
+            $val = $value;
+        } elseif ($defaultValue && !$this->getOption($this->valueProperty)) {
+            $val = $defaultValue;
+        }
+
         $options = $this->prepareOptions($options);
+
+        if ($val) {
+            $options[$this->valueProperty] = $val;
+        }
 
         if (!$this->needsLabel($options)) {
             $showLabel = false;
@@ -125,7 +184,9 @@ abstract class FormField
     protected function getModelValueAttribute($model, $name)
     {
         $transformedName = $this->transformKey($name);
-        if (is_object($model)) {
+        if (is_string($model)) {
+            return $model;
+        } elseif (is_object($model)) {
             return object_get($model, $transformedName);
         } elseif (is_array($model)) {
             return array_get($model, $transformedName);
@@ -151,11 +212,13 @@ abstract class FormField
      */
     protected function prepareOptions(array $options = [])
     {
+        $helper = $this->formHelper;
+
         if (array_get($this->options, 'template') !== null) {
             $this->template = array_pull($this->options, 'template');
         }
 
-        $options = $this->formHelper->mergeOptions($this->options, $options);
+        $options = $helper->mergeOptions($this->options, $options);
 
         if ($this->parent->haveErrorsEnabled()) {
             $this->addErrorClass($options);
@@ -165,11 +228,23 @@ abstract class FormField
             $this->name = $this->name.'[]';
         }
 
-        $options['wrapperAttrs'] = $this->formHelper->prepareAttributes($options['wrapper']);
-        $options['errorAttrs'] = $this->formHelper->prepareAttributes($options['errors']);
+        if ($this->getOption('required') === true) {
+            $options['label_attr']['class'] .= ' ' . $this->formHelper
+                ->getConfig('defaults.required_class', 'required');
+            $options['attr']['required'] = 'required';
+        }
+
+        $options['wrapperAttrs'] = $helper->prepareAttributes($options['wrapper']);
+        $options['errorAttrs'] = $helper->prepareAttributes($options['errors']);
 
         if ($options['is_child']) {
-            $options['labelAttrs'] = $this->formHelper->prepareAttributes($options['label_attr']);
+            $options['labelAttrs'] = $helper->prepareAttributes($options['label_attr']);
+        }
+
+        if ($options['help_block']['text']) {
+            $options['help_block']['helpBlockAttrs'] = $helper->prepareAttributes(
+                $options['help_block']['attr']
+            );
         }
 
         return $options;
@@ -245,6 +320,20 @@ abstract class FormField
     }
 
     /**
+     * Set single option on the field
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption($name, $value)
+    {
+        $this->options[$name] = $value;
+
+        return $this;
+    }
+
+    /**
      * Get the type of the field
      *
      * @return string
@@ -307,6 +396,10 @@ abstract class FormField
         return [
             'wrapper' => ['class' => $this->formHelper->getConfig('defaults.wrapper_class')],
             'attr' => ['class' => $this->formHelper->getConfig('defaults.field_class')],
+            'help_block' => ['text' => null, 'tag' => 'p', 'attr' => [
+                'class' => $this->formHelper->getConfig('defaults.help_block_class')
+            ]],
+            'value' => null,
             'default_value' => null,
             'label' => $this->formHelper->formatLabel($this->getRealName()),
             'is_child' => false,
@@ -326,11 +419,28 @@ abstract class FormField
     }
 
     /**
-     * @param $val
+     * @param $value
+     * @return $this
      */
-    protected function setValue($val)
+    protected function setValue($value)
     {
-        $this->options['default_value'] = $val;
+        if ($this->hasDefault) {
+            return $this;
+        }
+
+        $closure = $this->valueClosure;
+
+        if ($closure instanceof \Closure) {
+            $value = $closure($value ?: null);
+        }
+
+        if ($value === null || $value === false) {
+            $value = $this->getOption($this->defaultValueProperty);
+        }
+
+        $this->options[$this->valueProperty] = $value;
+
+        return $this;
     }
 
     /**

@@ -10,8 +10,15 @@
 
     <?php if ($showField): ?>
         <?php foreach ((array)$options['children'] as $child): ?>
-            <?= $child->render([], true, true, false) ?>
+            <?= $child->render(['selected' => $options['selected']], true, true, false) ?>
         <?php endforeach; ?>
+
+        <?php if ($options['help_block']['text']): ?>
+            <<?= $options['help_block']['tag'] ?> <?= $options['help_block']['helpBlockAttrs'] ?>>
+                <?= $options['help_block']['text'] ?>
+            </<?= $options['help_block']['tag'] ?>>
+        <?php endif; ?>
+
     <?php endif; ?>
 
     <?php if ($showError && isset($errors)): ?>

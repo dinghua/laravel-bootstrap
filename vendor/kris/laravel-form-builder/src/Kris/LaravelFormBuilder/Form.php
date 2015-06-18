@@ -17,7 +17,7 @@ class Form
      *
      * @var mixed
      */
-    protected $model = null;
+    protected $model = [];
 
     /**
      * @var FormHelper
@@ -68,6 +68,13 @@ class Form
     protected $exclude = [];
 
     /**
+     * Are form being rebuilt?
+     *
+     * @var bool
+     */
+    protected $rebuilding = false;
+
+    /**
      * Build the form
      *
      * @return mixed
@@ -78,31 +85,47 @@ class Form
 
     /**
      * Rebuild the form from scratch
+     *
+     * @return $this
      */
     public function rebuildForm()
     {
-        $this->fields = [];
-        return $this->buildForm();
-    }
-
-    /**
-     * Rebuild the fields
-     */
-    public function rebuildFields()
-    {
-        foreach ($this->getFields() as $name => $field) {
-            $options = $field->getOptions();
-            // Remove id attribute if form is named so we can link it
-            // properly to label
-            if ($this->getName() && $field->getOption('attr.id') === $name) {
-                unset($options['attr']['id']);
+        $this->rebuilding = true;
+        // If form is plain, buildForm method is empty, so we need to take
+        // existing fields and add them again
+        if (get_class($this) === 'Kris\LaravelFormBuilder\Form') {
+            foreach ($this->fields as $name => $field) {
+                $this->add($name, $field->getType(), $field->getOptions());
             }
-            $this->add($name, $field->getType(), $options, true);
+        } else {
+            $this->buildForm();
         }
+        $this->rebuilding = false;
+
+        return $this;
     }
 
     /**
-     * Add a single field to the form
+     * Create the FormField object
+     *
+     * @param string $name
+     * @param string $type
+     * @param array  $options
+     * @return FormField
+     */
+    protected function makeField($name, $type = 'text', array $options = [])
+    {
+        $this->setupFieldOptions($name, $options);
+
+        $fieldName = $this->getFieldName($name);
+
+        $fieldType = $this->getFieldType($type);
+
+        return new $fieldType($fieldName, $type, $this, $options);
+    }
+
+    /**
+     * Create a new field and add it to the form
      *
      * @param string $name
      * @param string $type
@@ -118,17 +141,115 @@ class Form
             );
         }
 
-        if (!$modify) {
-            $this->preventDuplicate($name);
+        if ($this->rebuilding && !$this->has($name)) {
+            return $this;
         }
 
-        $this->setupFieldOptions($name, $options);
+        $this->addField($this->makeField($name, $type, $options), $modify);
 
-        $fieldName = $this->getFieldName($name);
+        return $this;
+    }
 
-        $fieldType = $this->getFieldType($type);
+    /**
+     * Add a FormField to the form's fields
+     *
+     * @param FormField $field
+     * @return $this
+     */
+    protected function addField(FormField $field, $modify = false)
+    {
+        if (!$modify && !$this->rebuilding) {
+            $this->preventDuplicate($field->getRealName());
+        }
 
-        $this->fields[$name] = new $fieldType($fieldName, $type, $this, $options);
+        $this->fields[$field->getRealName()] = $field;
+
+        return $this;
+    }
+
+    /**
+     * Add field before another field
+     *
+     * @param string  $name         Name of the field before which new field is added
+     * @param string  $fieldName    Field name which will be added
+     * @param string  $type
+     * @param array   $options
+     * @param boolean $modify
+     * @return $this
+     */
+    public function addBefore($name, $fieldName, $type = 'text', $options = [], $modify = false)
+    {
+        $offset = array_search($name, array_keys($this->fields));
+
+        $beforeFields = array_slice($this->fields, 0, $offset);
+        $afterFields = array_slice($this->fields, $offset);
+
+        $this->fields = $beforeFields;
+
+        $this->add($fieldName, $type, $options, $modify);
+
+        $this->fields += $afterFields;
+
+        return $this;
+    }
+
+    /**
+     * Add field before another field
+     * @param string  $name         Name of the field after which new field is added
+     * @param string  $fieldName    Field name which will be added
+     * @param string  $type
+     * @param array   $options
+     * @param boolean $modify
+     * @return $this
+     */
+    public function addAfter($name, $fieldName, $type = 'text', $options = [], $modify = false)
+    {
+        $offset = array_search($name, array_keys($this->fields));
+
+        $beforeFields = array_slice($this->fields, 0, $offset + 1);
+        $afterFields = array_slice($this->fields, $offset + 1);
+
+        $this->fields = $beforeFields;
+
+        $this->add($fieldName, $type, $options, $modify);
+
+        $this->fields += $afterFields;
+
+        return $this;
+    }
+
+    /**
+     * Take another form and add it's fields directly to this form
+     * @param mixed   $class        Form to merge
+     * @param array   $options
+     * @param boolean $modify
+     * @return $this
+     */
+    public function compose($class, array $options = [], $modify = false)
+    {
+        $options['class'] = $class;
+
+        // If we pass a ready made form just extract the fields
+        if ($class instanceof Form) {
+            $fields = $class->getFields();
+        } elseif ($class instanceof Fields\ChildFormType) {
+            $fields = $class->getForm()->getFields();
+        } elseif (is_string($class)) {
+            // If its a string of a class make it the usual way
+            $options['model'] = $this->model;
+            $options['name'] = $this->name;
+
+            $form = $this->formBuilder->create($class, $options);
+            $fields = $form->getFields();
+        } else {
+            throw new \InvalidArgumentException(
+                "[{$class}] is invalid. Please provide either a full class name, Form or ChildFormType"
+            );
+        }
+
+        foreach ($fields as $field) {
+            $this->addField($field, $modify);
+        }
 
         return $this;
     }
@@ -213,7 +334,7 @@ class Form
 
         $i = 1;
         foreach ($fields as $key => $value) {
-            if ($value->getName() == $field_name) {
+            if ($value->getRealName() == $field_name) {
                 break;
             }
             $i++;
@@ -371,7 +492,7 @@ class Form
     {
         $this->name = $name;
 
-        $this->rebuildFields();
+        $this->rebuildForm();
 
         return $this;
     }
@@ -397,8 +518,6 @@ class Form
         $this->model = $model;
 
         $this->setupNamedModel();
-        // Rebuild so new data is bound to the fields
-        $this->rebuildFields();
 
         return $this;
     }
@@ -615,21 +734,6 @@ class Form
     }
 
     /**
-     * If form is named form, modify names to be contained in single key (parent[child_field_name])
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function getFieldName($name)
-    {
-        if ($this->getName() !== null) {
-            return $this->getName().'['.$name.']';
-        }
-
-        return $name;
-    }
-
-    /**
      * Set up options on single field depending on form options
      *
      * @param string $name
@@ -699,15 +803,30 @@ class Form
     }
 
     /**
-     * undocumented function
+     * Exclude some fields from rendering
      *
-     * @return void
-     * @author 
-     **/
+     * @return $this
+     */
     public function exclude(array $fields)
     {
         $this->exclude = array_merge($this->exclude, $fields);
 
         return $this;
+    }
+
+
+    /**
+     * If form is named form, modify names to be contained in single key (parent[child_field_name])
+     *
+     * @param string $name
+     * @return string
+     */
+    protected function getFieldName($name)
+    {
+        if ($this->getName() !== null) {
+            return $this->getName().'['.$name.']';
+        }
+
+        return $name;
     }
 }

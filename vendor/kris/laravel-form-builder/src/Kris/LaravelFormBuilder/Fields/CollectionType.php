@@ -12,6 +12,11 @@ class CollectionType extends ParentType
     protected $proto;
 
     /**
+     * @inheritdoc
+     */
+    protected $valueProperty = 'data';
+
+    /**
      * @return string
      */
     protected function getTemplate()
@@ -25,9 +30,8 @@ class CollectionType extends ParentType
     protected function getDefaults()
     {
         return [
-            'is_child' => true,
             'type' => null,
-            'options' => [],
+            'options' => ['is_child' => true],
             'prototype' => true,
             'data' => [],
             'property' => 'id',
@@ -58,8 +62,9 @@ class CollectionType extends ParentType
      */
     protected function createChildren()
     {
+        $this->children = [];
         $type = $this->getOption('type');
-        $oldInput = $this->parent->getRequest()->old($this->transformKey($this->getName()));
+        $oldInput = $this->parent->getRequest()->old($this->getNameKey());
 
         try {
             $fieldType = $this->formHelper->getFieldType($type);
@@ -70,14 +75,11 @@ class CollectionType extends ParentType
             );
         }
 
-        $data = $this->getOption('data');
+        $data = $this->getOption($this->valueProperty);
 
         // Needs to have more than 1 item because 1 is rendered by default
         if (count($oldInput) > 1) {
             $data = $oldInput;
-        } elseif (!$data) {
-            $data = $this->parent->getModel();
-            $data = $this->getModelValueAttribute($data, $this->getName());
         }
 
         if ($data instanceof Collection) {
@@ -144,7 +146,16 @@ class CollectionType extends ParentType
      */
     protected function generatePrototype(FormField $field)
     {
+        $field->setOption('is_prototype', true);
         $field = $this->setupChild($field, $this->getPrototypeName());
+
+        if ($field instanceof ChildFormType) {
+            foreach ($field->getChildren() as $child) {
+                if ($child instanceof CollectionType) {
+                    $child->preparePrototype($child->prototype());
+                }
+            }
+        }
 
         $this->proto = $field;
     }
@@ -157,5 +168,21 @@ class CollectionType extends ParentType
     protected function getPrototypeName()
     {
         return '[' . $this->getOption('prototype_name') . ']';
+    }
+
+    /**
+     * Prepare collection for prototype by adding prototype as child
+     * @param FormField $field
+     */
+    public function preparePrototype(FormField $field)
+    {
+        if (!$field->getOption('is_prototype')) {
+            throw new \InvalidArgumentException(
+                'Field ['.$field->getRealName().'] is not a valid prototype object.'
+            );
+        }
+
+        $this->children = [];
+        $this->children[] = $field;
     }
 }

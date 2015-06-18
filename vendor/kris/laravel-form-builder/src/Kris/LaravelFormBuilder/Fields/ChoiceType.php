@@ -7,17 +7,17 @@ class ChoiceType extends ParentType
      */
     protected $choiceType = 'select';
 
+    /**
+     * @inheritdoc
+     */
+    protected $valueProperty = 'selected';
+
+    /**
+     * @inheritdoc
+     */
     protected function getTemplate()
     {
         return 'choice';
-    }
-
-    protected function setValue($val)
-    {
-        $this->options['selected'] = $val;
-        $this->rebuild();
-
-        return $this;
     }
 
     /**
@@ -43,6 +43,9 @@ class ChoiceType extends ParentType
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function getDefaults()
     {
         return [
@@ -62,18 +65,18 @@ class ChoiceType extends ParentType
      */
     protected function createChildren()
     {
+        $this->children = [];
         $this->determineChoiceField();
 
-        $fieldMultiple = $this->options['multiple'] ? '[]' : '';
         $fieldType = $this->formHelper->getFieldType($this->choiceType);
 
         switch ($this->choiceType) {
             case 'radio':
             case 'checkbox':
-                $this->buildCheckableChildren($fieldType, $fieldMultiple);
+                $this->buildCheckableChildren($fieldType);
                 break;
             default:
-                $this->buildSelect($fieldType, $fieldMultiple);
+                $this->buildSelect($fieldType);
                 break;
         }
     }
@@ -82,24 +85,25 @@ class ChoiceType extends ParentType
      * Build checkable children fields from choice type
      *
      * @param string $fieldType
-     * @param string $fieldMultiple
      */
-    protected function buildCheckableChildren($fieldType, $fieldMultiple)
+    protected function buildCheckableChildren($fieldType)
     {
+        $multiple = $this->getOption('multiple') ? '[]' : '';
+
         foreach ((array)$this->options['choices'] as $key => $choice) {
-            $id = $choice . '_' . $key;
+            $id = str_replace('.', '_', $this->getNameKey()) . '_' . $key;
             $options = $this->formHelper->mergeOptions(
                 $this->getOption('choice_options'),
                 [
                     'attr'       => ['id' => $id],
                     'label_attr' => ['for' => $id],
-                    'label'         => $this->formHelper->formatLabel($choice),
-                    'checked'       => in_array($key, (array)$this->options['selected']),
-                    'default_value' => $key
+                    'label'      => $this->formHelper->formatLabel($choice),
+                    'checked'    => in_array($key, (array)$this->options[$this->valueProperty]),
+                    'value'      => $key
                 ]
             );
             $this->children[] = new $fieldType(
-                $this->name . $fieldMultiple,
+                $this->name . $multiple,
                 $this->choiceType,
                 $this->parent,
                 $options
@@ -111,12 +115,11 @@ class ChoiceType extends ParentType
      * Build select field from choice
      *
      * @param string $fieldType
-     * @param string $fieldMultiple Append [] if multiple choice
      */
-    protected function buildSelect($fieldType, $fieldMultiple)
+    protected function buildSelect($fieldType)
     {
         $this->children[] = new $fieldType(
-            $this->name . $fieldMultiple,
+            $this->name,
             $this->choiceType,
             $this->parent,
             $this->formHelper->mergeOptions($this->options, ['is_child' => true])

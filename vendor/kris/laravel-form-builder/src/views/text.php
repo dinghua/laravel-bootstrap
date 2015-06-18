@@ -9,7 +9,14 @@
     <?php endif; ?>
 
     <?php if ($showField): ?>
-    <?= Form::input($type, $name, $options['default_value'], $options['attr']) ?>
+        <?= Form::input($type, $name, $options['value'], $options['attr']) ?>
+
+        <?php if ($options['help_block']['text']): ?>
+            <<?= $options['help_block']['tag'] ?> <?= $options['help_block']['helpBlockAttrs'] ?>>
+                <?= $options['help_block']['text'] ?>
+            </<?= $options['help_block']['tag'] ?>>
+        <?php endif; ?>
+
     <?php endif; ?>
 
     <?php if ($showError && isset($errors)): ?>
@@ -18,7 +25,7 @@
         <?php endforeach; ?>
     <?php endif; ?>
 
-<?php if ($showLabel && $showField && !$options['is_child']): ?>
+<?php if ($showLabel && $showField): ?>
     <?php if ($options['wrapper'] !== false): ?>
     </div>
     <?php endif; ?>
