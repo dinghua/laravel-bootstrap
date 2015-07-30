@@ -1,3 +1,58 @@
+## 1.6.0
+- **Minor BC Break** - Rename `default_value` to `value`, and use `default_value` as fallback value if no `value` or model data available
+
+    If You published views update all templates and set `$options['default_value']` to `$options['value']`
+
+- Add form composition (Add fields from another form with `compose()` method) - Thanks to [@theshaunwalker](https://github.com/theshaunwalker)
+- Add trait for controller that allows shorter sintax (`$this->form()` and `$this->plain()`)
+- Fix `renderUntil` to check the name by real name instead of namespaced name
+- Fix collection of child forms not rendering when there is no data
+- Fix collection prototype to return proper `prototype_name` for nested collections
+- Return `$this` from `rebuildForm()` method to allow regenerating form in loops
+
+
+## 1.5.10
+- Fix collection of forms not rendering when there is no model or any data passed to collection.
+
+## 1.5.1
+- Add `entity` field type that allows fetching specific Model data
+
+## 1.5.0
+- Bind all fields values manually without Laravel's form builder `Form::model` (Check note below for possible BC break)
+- Add possibility to use Closure as default value for fields which solves issues like in [#98](https://github.com/kristijanhusak/laravel-form-builder/issues/98#issuecomment-103893235)
+- Fix passing model to child forms
+- Set FormBuilder class properties to protected to allow extending
+- Optmization and other minor fixes
+gg
+**Note**: If You published views before, they need to be updated to prevent possible breaking.
+Since value binding is now done in package, and `Form::model` is removed, views needs to be republished (or updated) to remove `Form::model` from [form.php](https://github.com/kristijanhusak/laravel-form-builder/blob/master/src/views/form.php). Also [choice.php](https://github.com/kristijanhusak/laravel-form-builder/blob/master/src/views/choice.php) needs to be updated to pass `selected` value.
+
+## 1.4.26
+- Fix expanded/multiple choice fields id by prefixing it with properly formatted name
+
+## 1.4.25
+- Add `addBefore` and `addAfter` methods to Form class to allow adding fields at specific location
+- Add `required` option for all field types, that adds class `required` (configurable in config) to label, and `required` attribute to field.
+
+## 1.4.22
+- Fix choice field type not adding `[]` on regular forms
+
+## 1.4.21
+- Add `wrapper` option for button type, defaults to false
+- Fix `help_block` rendering twice on repeated field type
+- Fix choice field type adding additional `[]` to the name in child forms/collections
+
+## 1.4.20
+- Add `help_block` option for fields which renders note under the field (http://getbootstrap.com/css/#forms)
+- Fix repeated type not closing tags properly
+
+## 1.4.13
+- Fix default_value for child forms ([#77](https://github.com/kristijanhusak/laravel-form-builder/issues/80))
+- Pass form data to child forms.
+
+## 1.4.12
+- Fix issue with showing validation errors for nested forms ([#78](https://github.com/kristijanhusak/laravel-form-builder/issues/78). Thanks to [@theshaunwalker](https://github.com/theshaunwalker))
+
 ## 1.4.11
 - Add ability to exclude some fields from rendering ([PR-77](https://github.com/kristijanhusak/laravel-form-builder/pull/77). Thanks to [@theshaunwalker](https://github.com/theshaunwalker))
 

@@ -35,9 +35,15 @@ You can change the prefix or filter/middleware for the routes. If you want full 
 
 The default configuration requires a directory called 'files' in the public folder. You can change this by publishing the config file.
 
-    php artisan vendor:publish
+    php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
 
 In your config/elfinder.php, you can change the default folder, the access callback or define your own roots.
+
+### Views
+
+You can override the default views by copying the resources/views folder. You can also do that with the `vendor:publish` command:
+
+    php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
 
 ### Using Filesystem disks
 
@@ -99,9 +105,9 @@ URLs will also point to the Glide server, for images.
 
 ### TinyMCE 4.x
 
-You can add tinyMCE integration with the following action:
+You can use tinyMCE integration with the following route, which by default is `/elfinder/tinymce4`:
 
-    'Barryvdh\Elfinder\ElfinderController@showTinyMCE4'
+    route('elfinder.tinymce4');
 
 In the TinyMCE init code, add the following line:
 
@@ -114,7 +120,7 @@ Then add the following function (change the `elfinder_url` to the correct path o
 ```javascript
 function elFinderBrowser (field_name, url, type, win) {
   tinymce.activeEditor.windowManager.open({
-    file: '/elfinder/tinymce',// use an absolute path!
+    file: '<?= route('elfinder.tinymce4') ?>',// use an absolute path!
     title: 'elFinder 2.0',
     width: 900,
     height: 450,
@@ -130,9 +136,9 @@ function elFinderBrowser (field_name, url, type, win) {
  
 ### TinyMCE 3.x
 
-You can add tinyMCE integration with the following action:
+You can add tinyMCE integration with the following route (default: `/elfinder/tinymce`):
 
-    'Barryvdh\Elfinder\ElfinderController@showTinyMCE'
+    route('elfinder.tinymce');
 
 In the TinyMCE init code, add the following line:
 
@@ -164,14 +170,14 @@ function elFinderBrowser (field_name, url, type, win) {
 
 ### CKeditor 4.x
 
-You can add CKeditor integration with the following action:
+You can add CKeditor integration with the following route:
 
-    'Barryvdh\Elfinder\ElfinderController@showCKeditor4'
+    'elfinder.ckeditor'
 
 In the CKeditor config file:
 
 ```javascript
-config.filebrowserBrowseUrl = '/elfinder/ckeditor4';
+config.filebrowserBrowseUrl = '/elfinder/ckeditor';
 ```
 
 ### Standalone Popup Selector
@@ -198,7 +204,7 @@ Colorbox depends on jQuery, so ensure that you have it included within your page
 
 Now add a link to the popup script, just before the close of your \<body> tag. A non-minified version is also provided, for if you wish to modify the colorbox config. Simply copy to your assets location, and adjust/minify as desired.
 
-```<script type="text/javascript" src="/packages/barryvdh/laravel-elfinder/js/standalonepopup.min.js"></script>```
+```<script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.min.js"></script>```
 
 #### Usage
 

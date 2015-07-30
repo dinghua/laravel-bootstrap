@@ -5,7 +5,14 @@
 <?php endif; ?>
 
     <?php if ($showField): ?>
-        <?= Form::radio($name, $options['default_value'], $options['checked'], $options['attr']) ?>
+        <?= Form::radio($name, $options['value'], $options['checked'], $options['attr']) ?>
+
+        <?php if ($options['help_block']['text']): ?>
+            <<?= $options['help_block']['tag'] ?> <?= $options['help_block']['helpBlockAttrs'] ?>>
+                <?= $options['help_block']['text'] ?>
+            </<?= $options['help_block']['tag'] ?>>
+        <?php endif; ?>
+
     <?php endif; ?>
 
     <?php if ($showLabel && $options['label'] !== false): ?>
