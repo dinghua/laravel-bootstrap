@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Exceptions;
+<?php namespace App\Exceptions;
 
 class NotAllowException extends \Exception{
 

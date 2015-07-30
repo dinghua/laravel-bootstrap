@@ -34,7 +34,7 @@
                             <td>{{$model->updated_at}}</td>
                             <td>
                                 <div class="dropdown">
-                                    @if(in_array($model->status, [\Chitunet\Models\Task::$STATUS_READY, \Chitunet\Models\Task::$STATUS_READY]))
+                                    @if(in_array($model->status, [\App\Models\Task::$STATUS_READY, \App\Models\Task::$STATUS_READY]))
                                         <button class="btn btn-danger btn-xs" onclick="pause({{$model->id}})">
                                             <i class="icon-control-pause"></i> 暂停
                                         </button>

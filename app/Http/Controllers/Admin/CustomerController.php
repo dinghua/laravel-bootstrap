@@ -1,8 +1,8 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
-use Chitunet\Interfaces\IEntity;
-use Chitunet\Models\Permission;
-use Chitunet\Models\Role;
+use App\Interfaces\IEntity;
+use App\Models\Permission;
+use App\Models\Role;
 use Entrust;
 
 /**

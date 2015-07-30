@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Services;
+<?php namespace App\Services;
 
 /**
  * Created by chitunet.com
@@ -8,7 +8,7 @@
  * All rights reserved.
  */
 
-use Chitunet\Models\User;
+use App\Models\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

@@ -1,10 +1,10 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
 use Auth;
-use Chitunet\Exceptions\NotAllowException;
+use App\Exceptions\NotAllowException;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Http\Request;
-use Chitunet\Interfaces\IEntity;
+use App\Interfaces\IEntity;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
@@ -20,9 +20,9 @@ use Entrust;
  */
 abstract class BaseAdminController extends BaseController {
 
-    private $_model_namespace = 'Chitunet\Models';
-    private $_form_namespace = 'Chitunet\Forms';
-    private $_request_namespace = 'Chitunet\Http\Requests';
+    private $_model_namespace = 'App\Models';
+    private $_form_namespace = 'App\Forms';
+    private $_request_namespace = 'App\Http\Requests';
 
     public $displayPerPage = 10;
     protected $_meta = [

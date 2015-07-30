@@ -1,9 +1,9 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
-use Chitunet\Interfaces\IEntity;
+use App\Interfaces\IEntity;
 use Auth;
-use Chitunet\Models\Permission;
-use Chitunet\Models\Role;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 /**

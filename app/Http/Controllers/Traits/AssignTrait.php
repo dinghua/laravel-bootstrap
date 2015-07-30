@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Http\Controllers\Traits;
+<?php namespace App\Http\Controllers\Traits;
 
 use Input;
 

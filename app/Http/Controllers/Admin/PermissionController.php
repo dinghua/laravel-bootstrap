@@ -1,7 +1,7 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
 use Auth;
-use Chitunet\Interfaces\IEntity;
+use App\Interfaces\IEntity;
 use Entrust;
 
 /**

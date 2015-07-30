@@ -1,8 +1,8 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
-use Chitunet\Interfaces\IEntity;
-use Chitunet\Models\Customer;
-use Chitunet\Models\Group;
+use App\Interfaces\IEntity;
+use App\Models\Customer;
+use App\Models\Group;
 use Datatable;
 use Response;
 use Entrust;

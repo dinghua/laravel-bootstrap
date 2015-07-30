@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Guard;

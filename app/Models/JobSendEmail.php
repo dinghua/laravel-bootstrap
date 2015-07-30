@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Models;
+<?php namespace App\Models;
 
 
 class JobSendEmail extends BaseJob {

@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Models;
+<?php namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,7 +14,7 @@ class Profile extends Model {
     protected $table = 'profiles';
 
     public function field(){
-        return $this->belongsTo('Chitunet\Models\ProfileField');
+        return $this->belongsTo('App\Models\ProfileField');
     }
 
 }

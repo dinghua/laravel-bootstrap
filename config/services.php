@@ -30,7 +30,7 @@ return [
 	],
 
 	'stripe' => [
-		'model'  => 'Chitunet\User',
+		'model'  => 'App\User',
 		'secret' => '',
 	],
 

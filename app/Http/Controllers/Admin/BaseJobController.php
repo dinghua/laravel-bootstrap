@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller as Controller;
 

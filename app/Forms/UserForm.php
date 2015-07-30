@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Forms;
+<?php namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 

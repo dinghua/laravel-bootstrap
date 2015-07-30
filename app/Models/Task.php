@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Models;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class Task extends Model {
     protected $table = 'tasks';
 
     public function jobs(){
-        return app('Chitunet\Models\\'.$this->module)->where('task_id', $this->id);
+        return app('App\Models\\'.$this->module)->where('task_id', $this->id);
     }
 
     public function pause()

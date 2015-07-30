@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Models;
+<?php namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**

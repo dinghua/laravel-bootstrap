@@ -1,6 +1,6 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
-use Chitunet\Models\Task;
+use App\Models\Task;
 use Illuminate\Routing\Controller as Controller;
 
 /**
@@ -45,7 +45,7 @@ class TaskController extends Controller {
     public function getShow($id){
         $task = Task::findOrFail($id);
         $module = $task->module;
-        $controller = app('Chitunet\Http\Controllers\Admin\\'.$module.'Controller');
+        $controller = app('App\Http\Controllers\Admin\\'.$module.'Controller');
         return $controller::show($id);
     }
 

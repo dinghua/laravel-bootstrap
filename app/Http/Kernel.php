@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Http;
+<?php namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -15,7 +15,7 @@ class Kernel extends HttpKernel {
         'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
         'Illuminate\Session\Middleware\StartSession',
         'Illuminate\View\Middleware\ShareErrorsFromSession',
-        'Chitunet\Http\Middleware\VerifyCsrfToken',
+        'App\Http\Middleware\VerifyCsrfToken',
     ];
 
     /**
@@ -24,9 +24,9 @@ class Kernel extends HttpKernel {
      * @var array
      */
     protected $routeMiddleware = [
-        //'auth' => 'Chitunet\Http\Middleware\Authenticate',
-        'admin'      => 'Chitunet\Http\Middleware\Administrator',
+        //'auth' => 'App\Http\Middleware\Authenticate',
+        'admin'      => 'App\Http\Middleware\Administrator',
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-        'guest'      => 'Chitunet\Http\Middleware\RedirectIfAuthenticated',
+        'guest'      => 'App\Http\Middleware\RedirectIfAuthenticated',
     ];
 }

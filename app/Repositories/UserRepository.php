@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Repositories;
+<?php namespace App\Repositories;
 
 /**
  * Created by chitunet.com
@@ -8,23 +8,23 @@
  * All rights reserved.
  */
 
-use Chitunet\Models\User;
-use Chitunet\Models\Role;
+use App\Models\User;
+use App\Models\Role;
 
 class UserRepository extends BaseRepository {
 
     /**
      * The Role instance.
      *
-     * @var Chitunet\Models\Role
+     * @var App\Models\Role
      */
     protected $role;
 
     /**
      * Create a new UserRepository instance.
      *
-     * @param  Chitunet\Models\User $user
-     * @param  Chitunet\Models\Role $role
+     * @param  App\Models\User $user
+     * @param  App\Models\Role $role
      * @return void
      */
     public function __construct(User $user, Role $role)

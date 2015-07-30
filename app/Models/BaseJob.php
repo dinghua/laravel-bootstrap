@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Models;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ abstract class BaseJob extends Model {
 
     public function task()
     {
-        return $this->belongsTo('Chitunet\Models\Task');
+        return $this->belongsTo('App\Models\Task');
     }
 
     public function finish()

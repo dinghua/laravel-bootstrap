@@ -1,8 +1,8 @@
-<?php  namespace Chitunet\Http\Controllers\Api;
+<?php  namespace App\Http\Controllers\Api;
 
-use Chitunet\Http\Controllers\Controller;
-use Chitunet\Models\Customer;
-use Chitunet\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Models\Customer;
+use App\Models\Role;
 use Datatable;
 
 /**

@@ -1,6 +1,6 @@
-<?php namespace Chitunet\Http\Requests;
+<?php namespace App\Http\Requests;
 
-use Chitunet\Http\Requests\Request;
+use App\Http\Requests\Request;
 
 class GroupRequest extends Request {
 

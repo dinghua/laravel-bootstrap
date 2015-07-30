@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Models;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +14,6 @@ class Customer extends Model {
     protected $table = 'customers';
     protected $fillable = [ 'name', 'email', 'phone', 'address', 'gender', 'birth', 'avatar', 'memo' ];
     public function groups(){
-        return $this->belongsToMany('Chitunet\Models\Group');
+        return $this->belongsToMany('App\Models\Group');
     }
 }

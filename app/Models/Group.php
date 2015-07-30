@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Models;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +9,6 @@ class Group extends Model {
 
     public function customers()
     {
-        return $this->belongsToMany('Chitunet\Models\Customer');
+        return $this->belongsToMany('App\Models\Customer');
     }
 }

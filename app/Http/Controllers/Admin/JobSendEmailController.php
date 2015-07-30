@@ -1,6 +1,6 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
-use Chitunet\Models\Task;
+use App\Models\Task;
 
 /**
  * Created by chitunet.com

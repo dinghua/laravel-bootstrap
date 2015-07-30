@@ -18,6 +18,6 @@ return array(
     'Illuminate\\Html\\' => array($vendorDir . '/illuminate/html'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'ClassPreloader\\' => array($vendorDir . '/classpreloader/classpreloader/src'),
-    'Chitunet\\' => array($baseDir . '/app'),
     'Barryvdh\\Elfinder\\' => array($vendorDir . '/barryvdh/laravel-elfinder/src'),
+    'App\\' => array($baseDir . '/app'),
 );

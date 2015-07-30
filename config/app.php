@@ -139,11 +139,11 @@ return [
         /*
          * Application Service Providers...
          */
-        'Chitunet\Providers\AppServiceProvider',
-        'Chitunet\Providers\BusServiceProvider',
-        'Chitunet\Providers\ConfigServiceProvider',
-        'Chitunet\Providers\EventServiceProvider',
-        'Chitunet\Providers\RouteServiceProvider',
+        'App\Providers\AppServiceProvider',
+        'App\Providers\BusServiceProvider',
+        'App\Providers\ConfigServiceProvider',
+        'App\Providers\EventServiceProvider',
+        'App\Providers\RouteServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'Kris\LaravelFormBuilder\FormBuilderServiceProvider',

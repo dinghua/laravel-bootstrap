@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Forms\Fields;
+<?php namespace App\Forms\Fields;
 
 use Kris\LaravelFormBuilder\Fields\FormField;
 

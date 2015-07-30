@@ -1,7 +1,7 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
-//use Chitunet\Http\Requests\CreateEntityRequest as Request;
-use Chitunet\Interfaces\IEntity;
+//use App\Http\Requests\CreateEntityRequest as Request;
+use App\Interfaces\IEntity;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 

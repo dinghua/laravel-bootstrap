@@ -1,11 +1,11 @@
-<?php namespace Chitunet\Console\Commands;
+<?php namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-use Chitunet\Models\Customer;
-use Chitunet\Models\JobSendEmail;
-use Chitunet\Models\Task;
+use App\Models\Customer;
+use App\Models\JobSendEmail;
+use App\Models\Task;
 
 class SendEmail extends Command {
 

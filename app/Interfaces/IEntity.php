@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Interfaces;
+<?php namespace App\Interfaces;
     /**
      * Created by chitunet.com
      * Author: Alex (dinghua@me.com)

@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: Chitunet
-        psr4_prefix: Chitunet
+        namespace: App
+        psr4_prefix: App
         src_path: app

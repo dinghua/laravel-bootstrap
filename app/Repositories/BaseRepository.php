@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Repositories;
+<?php namespace App\Repositories;
 
 /**
  * Created by PhpStorm.
@@ -7,7 +7,7 @@
  * Time: 1:30 PM
  */
 
-use Chitunet\Interfaces\IRepository;
+use App\Interfaces\IRepository;
 
 abstract class BaseRepository implements IRepository {
 
@@ -24,7 +24,7 @@ abstract class BaseRepository implements IRepository {
      * Get Model by id.
      *
      * @param  int $id
-     * @return Chitunet\Models\Model
+     * @return App\Models\Model
      */
     public function getById($id)
     {

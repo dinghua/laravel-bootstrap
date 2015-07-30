@@ -1,7 +1,7 @@
 <?php
 
-use Chitunet\Console\Commands\SendEmail;
-use Chitunet\Models\Task;
+use App\Console\Commands\SendEmail;
+use App\Models\Task;
 
 Route::get('/', function ()
 {
@@ -23,42 +23,42 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'admin' ], function ()
         return view('admin.dashboard');
     });
 
-    Route::controller('task', '\Chitunet\Http\Controllers\Admin\TaskController');
+    Route::controller('task', '\App\Http\Controllers\Admin\TaskController');
 
     Route::get('showPopup/{input_id}', '\Barryvdh\Elfinder\ElfinderController@showPopup');
 
-    Route::resource('permission', '\Chitunet\Http\Controllers\Admin\PermissionController');
-    Route::get('permission/{id}/delete', '\Chitunet\Http\Controllers\Admin\PermissionController@destroy');
+    Route::resource('permission', '\App\Http\Controllers\Admin\PermissionController');
+    Route::get('permission/{id}/delete', '\App\Http\Controllers\Admin\PermissionController@destroy');
 
-    Route::resource('role', '\Chitunet\Http\Controllers\Admin\RoleController');
-    Route::get('role/{id}/delete', '\Chitunet\Http\Controllers\Admin\RoleController@destroy');
+    Route::resource('role', '\App\Http\Controllers\Admin\RoleController');
+    Route::get('role/{id}/delete', '\App\Http\Controllers\Admin\RoleController@destroy');
 
-    Route::get('role_permissions', '\Chitunet\Http\Controllers\Admin\RoleController@getPermissions');
-    Route::post('role_permissions', '\Chitunet\Http\Controllers\Admin\RoleController@postPermissions');
+    Route::get('role_permissions', '\App\Http\Controllers\Admin\RoleController@getPermissions');
+    Route::post('role_permissions', '\App\Http\Controllers\Admin\RoleController@postPermissions');
 
-    Route::resource('entity', '\Chitunet\Http\Controllers\Admin\EntityController');
-    Route::get('entity/{id}/delete', '\Chitunet\Http\Controllers\Admin\EntityController@destroy');
+    Route::resource('entity', '\App\Http\Controllers\Admin\EntityController');
+    Route::get('entity/{id}/delete', '\App\Http\Controllers\Admin\EntityController@destroy');
 
-    Route::resource('customer', '\Chitunet\Http\Controllers\Admin\CustomerController');
-    Route::get('customer/{id}/delete', '\Chitunet\Http\Controllers\Admin\CustomerController@destroy');
+    Route::resource('customer', '\App\Http\Controllers\Admin\CustomerController');
+    Route::get('customer/{id}/delete', '\App\Http\Controllers\Admin\CustomerController@destroy');
 
-    Route::resource('group', '\Chitunet\Http\Controllers\Admin\GroupController');
-    Route::get('group/{id}/delete', '\Chitunet\Http\Controllers\Admin\GroupController@destroy');
+    Route::resource('group', '\App\Http\Controllers\Admin\GroupController');
+    Route::get('group/{id}/delete', '\App\Http\Controllers\Admin\GroupController@destroy');
 
-    Route::resource('user', '\Chitunet\Http\Controllers\Admin\UserController');
-    Route::get('user/{id}/delete', '\Chitunet\Http\Controllers\Admin\UserController@destroy');
+    Route::resource('user', '\App\Http\Controllers\Admin\UserController');
+    Route::get('user/{id}/delete', '\App\Http\Controllers\Admin\UserController@destroy');
 
 });
 
 Route::group([ 'prefix' => 'api', 'middleware' => 'admin' ], function ()
 {
-    Route::get('group/{id}/customers.json', '\Chitunet\Http\Controllers\Admin\GroupController@apiCustomers');
-    Route::get('user/{id}/roles.json', '\Chitunet\Http\Controllers\Admin\UserController@apiRoles');
+    Route::get('group/{id}/customers.json', '\App\Http\Controllers\Admin\GroupController@apiCustomers');
+    Route::get('user/{id}/roles.json', '\App\Http\Controllers\Admin\UserController@apiRoles');
 
-    Route::post('user/{id}/attach/{relation}', '\Chitunet\Http\Controllers\Admin\UserController@postAttach');
-    Route::post('user/{id}/detach/{relation}', '\Chitunet\Http\Controllers\Admin\UserController@postDetach');
+    Route::post('user/{id}/attach/{relation}', '\App\Http\Controllers\Admin\UserController@postAttach');
+    Route::post('user/{id}/detach/{relation}', '\App\Http\Controllers\Admin\UserController@postDetach');
 
-    Route::controller('choose', '\Chitunet\Http\Controllers\Api\ChooserController');
+    Route::controller('choose', '\App\Http\Controllers\Api\ChooserController');
 
     Route::post('sms', '@');
 });

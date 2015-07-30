@@ -1,4 +1,4 @@
-<?php namespace Chitunet\Events;
+<?php namespace App\Events;
 
 abstract class Event {
 

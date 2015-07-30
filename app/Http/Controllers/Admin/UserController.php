@@ -1,8 +1,8 @@
-<?php namespace Chitunet\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 
-use Chitunet\Http\Controllers\Traits\AssignTrait;
-use Chitunet\Interfaces\IEntity;
-use Chitunet\Models\User;
+use App\Http\Controllers\Traits\AssignTrait;
+use App\Interfaces\IEntity;
+use App\Models\User;
 use Datatable;
 use Entrust;
 
